@@ -3,6 +3,6 @@
 When installing new plugins, run
 [source,sh]
 ----
-tmux source ~/.tmux.conf
+tmux source $XDG_CONFIG_HOME/tmux/tmux.conf
 ----
 if tmux is already running to make it use the updated config file, then press prefix + I (capital i) to install plugins. You can press prefix + U (capital u) to update plugins. It will ask which to update, you can choose `all`.
