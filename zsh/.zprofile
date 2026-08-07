@@ -18,6 +18,8 @@ export CXX="clang++"
 export CC_LD="lld"
 export CXX_LD="lld"
 
+export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/
+
 export ASAN_OPTIONS="detect_leaks=1"
 export LSAN_OPTIONS="suppressions=$HOME/.lsan_suppressions"
 
