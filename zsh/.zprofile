@@ -20,10 +20,6 @@ export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
-for formula in "bison" "ruby" "openjdk" "rustup" "llvm" "binutils" "curl"; do
-	PATH="$HOMEBREW_PREFIX/opt/$formula/bin:$PATH"
-done
-
 PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
 
