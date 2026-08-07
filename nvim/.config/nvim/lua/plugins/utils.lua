@@ -14,6 +14,13 @@ table.insert(spec, {
 })
 
 table.insert(spec, {
+	"kevinhwang91/nvim-ufo",
+	dependencies = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig", "kevinhwang91/promise-async" },
+	opts = {},
+	keys = { "za", "zR", "zM" },
+})
+
+table.insert(spec, {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {},
@@ -30,6 +37,7 @@ table.insert(spec, {
 	"3rd/image.nvim",
 	opts = {},
 	enabled = not vim.g.neovide,
+	event = "VeryLazy",
 })
 
 table.insert(spec, {
