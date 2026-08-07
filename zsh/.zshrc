@@ -48,6 +48,8 @@ alias nvim="echo Use the alias v instead."
 alias v="command nvim"
 alias vimhost="v --cmd 'let g:live_share_username=\"host\"'"
 
+alias bwul='export BW_SESSION="$(bw unlock --raw)"'
+
 alias q="builtin exit"
 alias exit="echo Use the alias q instead"
 
