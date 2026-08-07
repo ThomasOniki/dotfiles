@@ -41,7 +41,6 @@
   layers  (layer-switch layers)
   qwerty  (layer-switch qwerty)
   base    (layer-switch base)
-  mc      (layer-switch minecraft)
   nil     (layer-switch nil)
 
   caps-base (tap-hold $tap-time $hold-time caps @base)
@@ -115,13 +114,4 @@
    @caps-base   a        s        d        f        g        h        j        k        l        ;        '        \
    lsft     `        z        x        c        v        b        n        m        ,        .        /        up       rsft
    fn       lctl     lalt     lmet                       spc                        rmet     ralt     left     down     right
-)
-
-(deflayer minecraft
-   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX   XX
-   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-   XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-   XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
 )
