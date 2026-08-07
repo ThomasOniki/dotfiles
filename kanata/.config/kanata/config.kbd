@@ -1,0 +1,108 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  tab         q       w       e       r       t       y       u       i       o       p       [
+  caps        a       s       d       f       g       h       j       k       l       ;       '
+  lsft   `        z       x       c       v       b       n       m       ,       .       /        rsft
+                          lmet                    spc                     rmet
+)
+
+(defvar
+  tap-time   180
+  hold-time  180
+)
+
+(defalias
+  nav  (layer-while-held nav)
+  sym1 (layer-while-held sym1)
+  sym2 (layer-while-held sym2)
+
+  hyper (multi lshift lctl lalt lmet)
+
+  t-cmd (tap-hold $tap-time $hold-time t lmet)
+  s-sft (tap-hold $tap-time $hold-time s lshift)
+  r-ctl (tap-hold $tap-time $hold-time r lctl)
+  f-hyp (tap-hold $tap-time $hold-time f @hyper)
+  w-opt (tap-hold $tap-time $hold-time w lalt)
+
+  n-cmd (tap-hold $tap-time $hold-time n rmet)
+  e-sft (tap-hold $tap-time $hold-time e rshift)
+  i-ctl (tap-hold $tap-time $hold-time i rctl)
+  u-hyp (tap-hold $tap-time $hold-time u @hyper)
+  y-opt (tap-hold $tap-time $hold-time y ralt)
+
+  ret-esc (tap-hold $tap-time $hold-time ret esc)
+  spc-nav (tap-hold $tap-time $hold-time spc @nav)
+
+  layers  (layer-switch layers)
+  qwerty  (layer-switch qwerty)
+  base    (layer-switch base)
+  mc      (layer-switch minecraft)
+
+  caps-base (tap-hold $tap-time $hold-time caps @base)
+
+  tmux-f (macro C-b f)
+  tmux-n (macro C-b n)
+  tmux-p (macro C-b p)
+  tmux-x (macro C-b x)
+  tmux-c (macro C-b c)
+  tmux-r (macro C-b S-;)
+)   
+
+(deflayer base
+  tab         q       @w-opt  @f-hyp  p       b       j       l       @u-hyp  @y-opt  ;       tab
+  bspc        a       @r-ctl  @s-sft  @t-cmd  g       m       @n-cmd  @e-sft  @i-ctl  o       @ret-esc
+  XX     `        x       c       d       v       z       k       h       ,       .       /        caps
+                          @sym2                   @spc-nav                @sym1
+)
+
+(deflayer sym1
+  XX          XX      S-[     S-]     S-4     XX      XX      S-2     S-7     S--     XX      `
+  esc         [       ]       S-9     S-0     =       -       S-=     S-8     S-1     S-/     S--
+  @base  XX       XX      XX      XX      XX      XX      XX      XX      XX      XX      XX       XX
+                          XX                      XX                      XX
+)
+
+(deflayer sym2
+  XX          XX      S-5     S-3     S-6     XX      XX      5       3       2       9       ;
+  XX          S-,     S-.     S-'     '       f       6       1       0       4       8       7
+  XX     XX       XX     XX       XX      /       S-`     \       n       XX      XX      XX       XX
+                         XX                       XX                      XX
+)
+
+(deflayer nav
+  XX          XX      @tmux-r @tmux-x @tmux-c XX      XX      XX      up      XX      XX      XX
+  a           XX      @tmux-p @tmux-f @tmux-n XX      pgup    left    down    right   pgdn    @layers
+  XX     XX       XX      XX      XX      XX      XX      XX      XX      XX      XX      XX       lrld
+                          XX                      XX                      XX
+)
+
+(deflayer layers
+  XX          @qwerty XX      XX      XX      @base   XX      XX      XX      XX      XX      XX
+  XX          XX      XX      XX      XX      XX      @mc     (layer-switch nil)      XX      XX      XX      XX
+  XX     XX       XX      XX      XX      XX      XX      XX      XX      XX      XX      XX       XX
+                          XX                      XX                      XX
+)
+
+(deflayer nil
+  XX          XX XX      XX      XX      XX XX      XX      XX      XX      XX      XX
+  XX          XX      XX      XX      XX      XX      XX     XX      XX      XX      XX      XX
+  XX     XX       XX      XX      XX      XX      XX      XX      XX      XX      XX      XX       XX
+                          XX                      XX                      XX
+)
+
+(deflayer qwerty
+  tab         q       w       e       r       t       y       u       i       o       p       [
+  @caps-base  a       s       d       f       g       h       j       k       l       ;       '
+  lsft   `        z       x       c       v       b       n       m       ,       .       /        rsft
+                          lmet                    spc                     rmet
+)
+
+(deflayer minecraft
+  9           1      2       w       3       e       XX      XX      XX      XX      XX      XX
+  f3          lsft   a       s       d       4       XX      XX      XX      XX      XX      XX
+  5      6        7       f       8       XX      XX      XX      XX      XX      XX      XX       XX
+                          XX                      spc                     XX
+)
