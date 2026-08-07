@@ -6,9 +6,14 @@ export XDG_STATE_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$GOPATH/bin"
 export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
+export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
