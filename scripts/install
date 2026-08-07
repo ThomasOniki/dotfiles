@@ -10,7 +10,7 @@ cd ..
 
 kernel="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
-if [ "$kernel" = "darwin" ] && [ -z "$(which brew)" ]; then
+if [ "$kernel" = "darwin" ] && [ -z "$(command -v brew)" ]; then
 	echo 'Detected darwin but homebrew not found, do you want to install it? (y/N)'
 
 	read install_brew
@@ -30,7 +30,7 @@ for module in "$@"; do
 
 	if [[ -f "scripts/symlink-paths/$module.txt" ]]; then
 		while read src dst; do
-			eval "try_ln \"$src\" \"$dst\""
+			eval "try_ln $src $dst"
 		done <"scripts/symlink-paths/$module.txt"
 	else
 		try_ln "$module" "$cfg_home/$module"
