@@ -98,14 +98,6 @@ map("n", "<leader>X", "<cmd>bw!<CR>", { desc = "Force quit buffer without saving
 map("n", "<leader>q", "<cmd>wqa<CR>", { desc = "Save and close all buffers" })
 map("n", "<leader>Q", "<cmd>qa!<CR>", { desc = "Force quit all buffers without saving" })
 
-map("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Go to definition" })
-map("n", "<leader>lk", vim.lsp.buf.hover, { desc = "Show hover info" })
-map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
-map("n", "<leader>lc", vim.lsp.buf.code_action, { desc = "LSP code action" })
-map("n", "<leader>lh", function()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end, { desc = "Toggle LSP inlay hints" })
-
 map("n", "<leader>t", "<cmd>term<CR>", { desc = "Open terminal buffer" })
 
 map("i", "<esc>", function()

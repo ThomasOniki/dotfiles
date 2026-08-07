@@ -1,10 +1,6 @@
-== Requirements
-- tmux
-- tpm (the Tmux Plugin Manager)
-
 == Notes
 
-When installing new plugins or using this config file for the first time, run
+When installing new plugins, run
 [source,sh]
 ----
 tmux source ~/.tmux.conf

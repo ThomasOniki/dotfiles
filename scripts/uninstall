@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+if [[ "$BASH_SOURCE" != "$0" ]]; then
+	echo "run this file, don't source it."
+	return
+fi
+
+cd "$(dirname "$BASH_SOURCE")"
+cd ..
+
+kernel="$(uname -s | tr '[:upper:]' '[:lower:]')"
+
+source scripts/get-cfg-dir.sh
+
+for module in "$@"; do
+	if ! [[ -d "./$module" ]]; then
+		echo "Module '$module' not found."
+		continue
+	fi
+
+	if [[ -f "scripts/symlink-paths/$module.txt" ]]; then
+		while read src dst; do
+			eval "source scripts/try_revert_ln.sh \"$src\" \"$dst\""
+		done <"scripts/symlink-paths/$module.txt"
+	else
+		source scripts/try_revert_ln.sh "$module" "$XDG_CONFIG_HOME/$module"
+	fi
+
+	if [[ -f "scripts/uninstall-scripts/$module.sh" ]]; then
+		source "scripts/uninstall-scripts/$module.sh"
+	fi
+	if [[ -f "scripts/uninstall-scripts/$module-$kernel.sh" ]]; then
+		source "scripts/uninstall-scripts/$module-$kernel.sh"
+	fi
+done

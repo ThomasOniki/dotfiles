@@ -1,19 +1,10 @@
-#/usr/bin/env bash
-
 echo '
-Running kanata setup script.
+Running kanata install script.
 This script was based off of the guide by thomasthai on github:
 https://github.com/jtroo/kanata/discussions/1537
-If you are interested in what this script does, look at this page or read the source code for this script (scripts/setup-kanata-mac.sh).
+If you are interested in what this script does, look at this page or read the source code for this script (scripts/install-kanata-darwin.sh).
 You may press C-c at any point to exit.
 '
-
-if [[ "$BASH_SOURCE" != "$0" ]]; then
-	echo "run this file, don't source it."
-	return 0
-fi
-
-cd "$(dirname "$BASH_SOURCE")"
 
 if [[ "$(command -v kanata)" == "" ]]; then
 
@@ -96,8 +87,23 @@ karabiner_vhid_plist='<?xml version="1.0" encoding="UTF-8"?>
 </dict>
 </plist>'
 
-echo "Creating launch daemons for kanata and the karabiner vhid, this may require your password."
-echo "$kanata_plist" | sudo tee '/Library/LaunchDaemons/org.keymap.kanata.plist' >/dev/null
+echo 'Creating launch daemons for kanata and the karabiner vhid, this may require your password.
+'
 echo "$karabiner_vhid_plist" | sudo tee '/Library/LaunchDaemons/org.keymap.karabiner-vhid.plist' >/dev/null
+echo "$kanata_plist" | sudo tee '/Library/LaunchDaemons/org.keymap.kanata.plist' >/dev/null
 
-echo 'Setup kanata successfully (hopefully).'
+sudo launchctl bootstrap system '/Library/LaunchDaemons/org.keymap.karabiner-vhid.plist'
+sudo launchctl bootstrap system '/Library/LaunchDaemons/org.keymap.kanata.plist'
+
+echo 'Sleeping 10 seconds to let kanata get ready...
+'
+sleep 10
+echo 'Your keyboard should now be remapped.
+
+If you find that you can'\''t type anything, go to System Settings -> Accessibility -> Keyboard and enable Accessibility Keyboard temporarily for troubleshooting.
+You can also try deleting the LaunchDaemons /Library/LaunchDaemons/org.keymap.karabiner-vhid.plist and /Library/LaunchDaemons/org.keymap.kanata.plist.
+After a reboot, they should stop.
+You can look at the exit codes of the virtual HID device and kanata by running 
+sudo launchctl list | grep keymap
+Their logs can be seen in ~/Library/logs/kanata_stderr.log and ~/Library/Logs/kanata_stdout.log.
+'
