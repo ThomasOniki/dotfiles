@@ -27,9 +27,9 @@ for module in "$@"; do
 	fi
 
 	if [[ -f "scripts/uninstall-scripts/$module.bash" ]]; then
-		source "scripts/uninstall-scripts/$module.bash"
+		bash "scripts/uninstall-scripts/$module.bash"
 	fi
 	if [[ -f "scripts/uninstall-scripts/$module-$kernel.bash" ]]; then
-		source "scripts/uninstall-scripts/$module-$kernel.bash"
+		bash "scripts/uninstall-scripts/$module-$kernel.bash"
 	fi
 done
