@@ -34,7 +34,7 @@ local function unmap_colemak()
   unmap({ "n", "v" }, "u")
   unmap({ "n", "v" }, "e")
 
-  unmap({ "n", "v" }, "h")
+  unmap({ "n", "v" }, "m")
   unmap({ "n", "v" }, "o")
 
   unmap({ "n", "v" }, "t")
