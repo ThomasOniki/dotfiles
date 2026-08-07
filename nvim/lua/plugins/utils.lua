@@ -41,8 +41,11 @@ table.insert(spec, {
 })
 
 table.insert(spec, {
+  "jghauser/follow-md-links.nvim",
+})
+table.insert(spec, {
   "OXY2DEV/markview.nvim",
-  dependencies = { "nvim-mini/mini.icons" },
+  dependencies = { "jghauser/follow-md-links.nvim", "nvim-mini/mini.icons" },
   opts = {
     preview = { icon_provider = "mini" },
   },
