@@ -1,4 +1,4 @@
-require("config.keymaps").colemak()
+require("config.keymaps").map("colemak")
 require("config.options")
 require("config.autocommands")
 require("config.lazy")

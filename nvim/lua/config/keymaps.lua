@@ -1,111 +1,82 @@
 vim.g.mapleader = " "
 
-local map = vim.keymap.set
-local unmap = vim.keymap.del
+---@type { [string]: LazyKeysSpec[] }
+local mappings = {}
 
-local function map_colemak()
-  map({ "n", "v" }, "n", "h", { desc = "Left" })
-  map({ "n", "v" }, "i", "l", { desc = "Right" })
-  map({ "n", "v" }, "u", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Up" })
-  map({ "n", "v" }, "e", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Down" })
+mappings.default = {
+  { "<leader>p", '"_dP', desc = "Paste without coping overwritten text", mode = "v" },
+  { "<esc>", "<Esc><cmd>noh<CR>", desc = "Escape and :noh", mode = { "n", "i", "s" } },
+  { "<leader>w", "<cmd>up<CR>", desc = "Save buffer" },
+  { "<leader>W", "<cmd>wa<CR>", desc = "Save all buffers" },
+  { "<leader>x", "<cmd>up|bd<CR>", desc = "Save and close buffer" },
+  { "<leader>X", "<cmd>bw!<CR>", desc = "Force quit buffer without saving" },
+  { "<leader>q", "<cmd>wqa<CR>", desc = "Save and close all buffers" },
+  { "<leader>Q", "<cmd>qa!<CR>", desc = "Force quit all buffers without saving" },
+  { "<leader>t", "<cmd>term<CR>i", desc = "Open terminal buffer" },
+  { "<D-v>", '"*p', desc = "Paste from clipboard" },
+  {
+    "<esc>",
+    function()
+      vim.notify(
+        "Use jk, jj, or tn to exit insert mode. You can disable this keymap near the end of lua/config/keymaps.lua."
+      )
+    end,
+    mode = "i",
+  },
+}
 
-  map({ "n", "v" }, "m", "g^", { desc = "Start of line (non ws)" })
-  map({ "n", "v" }, "o", "g$", { desc = "End of line" })
+mappings.colemak = {
+  { "n", "h", desc = "Left", mode = { "n", "v" } },
+  { "i", "l", desc = "Right", mode = { "n", "v" } },
+  { "u", "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Up", mode = { "n", "v" } },
+  { "e", "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Down", mode = { "n", "v" } },
+  { "m", "g^", desc = "Start of line (non ws)", mode = { "n", "v" } },
+  { "o", "g$", desc = "End of line", mode = { "n", "v" } },
+  { "t", "W", desc = "Next WORD", mode = { "n", "v" } },
+  { "T", "w", desc = "Next word", mode = { "n", "v" } },
+  { "r", "B", desc = "Prev WORD", mode = { "n", "v" } },
+  { "R", "b", desc = "Prev word", mode = { "n", "v" } },
+  { "a", "i", desc = "Insert", mode = { "n", "v" } },
+  { "w", "a", desc = "Append", mode = { "n", "v" } },
+  { "q", "u", desc = "Undo", mode = { "n", "v" } },
+  { "h", ":", desc = "Cmd mode", mode = { "n", "v" } },
+  { "<leader>n", "<cmd>bp<CR>", desc = "Prev buffer" },
+  { "<leader>i", "<cmd>bn<CR>", desc = "Next buffer" },
+  { "<leader>m", "q", desc = "Record macro" },
+}
 
-  map({ "n", "v" }, "t", "W", { desc = "Next WORD" })
-  map({ "n", "v" }, "T", "w", { desc = "Next word" })
-  map({ "n", "v" }, "r", "B", { desc = "Prev WORD" })
-  map({ "n", "v" }, "R", "b", { desc = "Prev word" })
-
-  map({ "n", "v" }, "a", "i", { desc = "Insert" })
-  map({ "n", "v" }, "w", "a", { desc = "Append" })
-
-  map({ "n", "v" }, "q", "u", { desc = "Undo" })
-
-  map({ "n", "v" }, "h", ":", { desc = "Cmd mode" })
-
-  map("n", "<leader>n", "<cmd>bp<CR>", { desc = "Prev buffer" })
-  map("n", "<leader>i", "<cmd>bn<CR>", { desc = "Next buffer" })
-end
-
-local function unmap_colemak()
-  unmap({ "n", "v" }, "n")
-  unmap({ "n", "v" }, "i")
-  unmap({ "n", "v" }, "u")
-  unmap({ "n", "v" }, "e")
-
-  unmap({ "n", "v" }, "m")
-  unmap({ "n", "v" }, "o")
-
-  unmap({ "n", "v" }, "t")
-  unmap({ "n", "v" }, "T")
-  unmap({ "n", "v" }, "r")
-  unmap({ "n", "v" }, "R")
-
-  unmap({ "n", "v" }, "a")
-  unmap({ "n", "v" }, "w")
-
-  unmap({ "n", "v" }, "q")
-
-  unmap({ "n", "v" }, "h")
-
-  unmap("n", "<leader>n")
-  unmap("n", "<leader>i")
-end
-
-local function map_qwerty() end
-local function unmap_qwerty() end
-
-local M = {}
-local is_colemak_mapped = false
-local is_qwerty_mapped = false
-
-M.colemak = function()
-  if is_qwerty_mapped then
-    unmap_qwerty()
-    is_qwerty_mapped = false
-  end
-
-  if not is_colemak_mapped then
-    map_colemak()
-    is_colemak_mapped = true
+local function map(list)
+  for _, entry in ipairs(mappings[list]) do
+    local opts = {}
+    for key, value in pairs(entry) do
+      if type(key) == "string" and key ~= "mode" then
+        opts[key] = value
+      end
+    end
+    vim.keymap.set(entry.mode or "n", entry[1], entry[2], opts)
   end
 end
 
-M.qwerty = function()
-  if is_colemak_mapped then
-    unmap_colemak()
-    is_colemak_mapped = false
-  end
-
-  if not is_qwerty_mapped then
-    map_qwerty()
-    is_qwerty_mapped = true
+local function unmap(list)
+  for _, entry in ipairs(mappings[list]) do
+    local opts = {}
+    for key, value in pairs(entry) do
+      if type(key) == "string" then
+        opts[key] = value
+      end
+    end
+    vim.keymap.del(entry.mode or "n", entry[1], opts)
   end
 end
 
-vim.api.nvim_create_user_command("UseColemakKeymaps", M.colemak, { desc = "Remap keys for colemak dh" })
-vim.api.nvim_create_user_command("UseQwertyKeymaps", M.qwerty, { desc = "Remap keys for qwerty" })
+vim.api.nvim_create_user_command("UseColemakKeymaps", function()
+  map("colemak")
+end, { desc = "Remap keys for colemak dh" })
 
-map({ "v" }, "<leader>p", '"_dP', { desc = "Paste without coping overwritten text" })
+vim.api.nvim_create_user_command("UseQwertyKeymaps", function()
+  unmap("colemak")
+end, { desc = "Remap keys for qwerty" })
 
-map({ "n", "i", "s" }, "<Esc>", "<Esc><cmd>noh<CR>", { desc = "Escape and :noh" })
+map("default")
 
-map("n", "<leader>w", "<cmd>up<CR>", { desc = "Save buffer" })
-map("n", "<leader>W", "<cmd>wa<CR>", { desc = "Save all buffers" })
-map("n", "<leader>x", "<cmd>up|bd<CR>", { desc = "Save and close buffer" })
-map("n", "<leader>X", "<cmd>bw!<CR>", { desc = "Force quit buffer without saving" })
-map("n", "<leader>q", "<cmd>wqa<CR>", { desc = "Save and close all buffers" })
-map("n", "<leader>Q", "<cmd>qa!<CR>", { desc = "Force quit all buffers without saving" })
-
-map("n", "<leader>t", "<cmd>term<CR>i", { desc = "Open terminal buffer" })
-
-map("i", "<esc>", function()
-  vim.notify(
-    "Use jk, jj, or tn to exit insert mode. You can disable this keymap near the end of lua/config/keymaps.lua."
-  )
-end)
-
-map("n", "<D-v>", '"*p', { desc = "Paste from system" })
-
-return M
+return { map = map, unmap = unmap }
