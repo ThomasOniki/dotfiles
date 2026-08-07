@@ -18,7 +18,9 @@ local function configure_lsps()
 
   vim.lsp.config("clangd", {
     cmd = { "clangd", "--header-insertion=never", "--function-arg-placeholders=0" },
+    root_markers = { ".clangd", "compile_commands.json", ".git" },
   })
+  vim.lsp.enable("clangd")
 end
 
 ---@type LazyPluginSpec[]
@@ -29,7 +31,6 @@ table.insert(spec, {
   opts_extend = { "ensure_installed" },
   opts = {
     ensure_installed = {
-      "clangd",
       "rust-analyzer",
       "lua-language-server",
       "bash-language-server",
