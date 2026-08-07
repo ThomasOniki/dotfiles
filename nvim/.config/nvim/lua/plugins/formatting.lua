@@ -1,57 +1,60 @@
-local opts = {
-  formatters_by_ft = {
-    c = { "clang_format" },
-    cpp = { "clang_format" },
-    objc = { "clang_format" },
-    objcpp = { "clang_format" },
-    cuda = { "clang_format" },
+---@type LazyPluginSpec[]
+local spec = {}
 
-    lua = { "stylua" },
+table.insert(spec, {
+  "stevearc/conform.nvim",
+  opts = {
+    formatters_by_ft = {
+      c = { "clang_format" },
+      cpp = { "clang_format" },
+      objc = { "clang_format" },
+      objcpp = { "clang_format" },
+      cuda = { "clang_format" },
 
-    cmake = { "cmake_format" },
+      lua = { "stylua" },
 
-    sh = { "shfmt" },
-    zsh = { "shfmt" },
-  },
+      cmake = { "cmake_format" },
 
-  formatters = {
-    clang_format = {
-      prepend_args = { "--style=file" },
+      sh = { "shfmt" },
+      zsh = { "shfmt" },
+
+      rust = { "rustfmt" },
     },
-    stylua = {
-      prepend_args = {
-        "--indent-type",
-        "Spaces",
-        "--indent-width",
-        "2",
+
+    formatters = {
+      clang_format = {
+        prepend_args = { "--style=file" },
       },
-    },
-    cmake_format = {},
-  },
-
-  format_on_save = {
-    timeout_ms = 500,
-    lsp_fallback = true,
-  },
-}
-
-return {
-  {
-    "mason-org/mason.nvim",
-    opts_extend = { "ensure_installed" },
-    opts = {
-      ensure_installed = {
-        "clang-format",
-        "stylua",
-        "shfmt",
-        "cmakelang",
+      stylua = {
+        prepend_args = {
+          "--indent-type",
+          "Spaces",
+          "--indent-width",
+          "2",
+        },
       },
+      cmake_format = {},
+    },
+
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_fallback = true,
     },
   },
+  event = "BufWritePre",
+})
 
-  {
-    "stevearc/conform.nvim",
-    opts = opts,
-    event = "BufWritePre",
+table.insert(spec, {
+  "mason-org/mason.nvim",
+  opts_extend = { "ensure_installed" },
+  opts = {
+    ensure_installed = {
+      "clang-format",
+      "stylua",
+      "shfmt",
+      "cmakelang",
+    },
   },
-}
+})
+
+return spec
