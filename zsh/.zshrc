@@ -3,20 +3,17 @@ fastfetch
 alias c="clear"
 alias rm="trash"
 
-alias ls="lsd -A"
-alias lsl="lsd -A -l"
+alias ls="lsd --almost-all"
+alias lsl="lsd --almost-all --long"
 
 fm() {
-	manpath 2>/dev/null |
-		sed 's/:/\n/g' |
-		xargs fd --no-ignore --hidden --absolute-path --type=directory --follow . 2>/dev/null |
+	fd --no-ignore --hidden --absolute-path --type=directory --follow . $(manpath 2>/dev/null |
+		sed 's/:/\n/g') 2>/dev/null |
 		rg --color=never '/man[1-9nl]' |
 		xargs fd --no-ignore --hidden --absolute-path --type=file --follow . |
 		sed 's/\(.*\)\.gz/\1/g' |
 		sed 's/.*\/\([^\/]*\)\.\(.*\)/\1(\2)/g' |
-		fzf --query="$@" --preview='echo {} |
-	sed "s/\(.*\)(\(.*\))/\2 \"\1\"/g" 2>/dev/null |
-	xargs man -P "col -bx | bat --color=always --language=man"' |
+		fzf --query="$@" --preview='man -P "bat --language=man --color=always" "$(sed "s/.*(\(.*\))/\1/g" <<<{})" "$(sed "s/(.*//g" <<<{})"' |
 		sed 's/\(.*\)(\(.*\))/\2 "\1"/g' 2>/dev/null |
 		xargs man
 }
