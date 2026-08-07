@@ -1,0 +1,4 @@
+ignore-globs:
+  - .git
+  - .zig-cache
+  - .cache
