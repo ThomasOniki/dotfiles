@@ -30,6 +30,7 @@ export PATH
 export MANPATH="$XDG_CACHE_HOME/cppman:$MANPATH"
 
 export EDITOR="nvim"
+export LESSUTFCHARDEF='E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p'
 export PAGER="bat"
 export MANPAGER="nvim -c Man!"
 
