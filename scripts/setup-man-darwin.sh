@@ -57,19 +57,16 @@ kanata_plist='<?xml version="1.0" encoding="UTF-8"?>
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>org.keymap.kanata</string>'
-
-kanata_plist="$kanata_plist
+    <string>org.keymap.kanata</string>'"
+		$kanata_plist
     <key>ProgramArguments</key>
     <array>
       <string>$(command -v kanata)</string>
       <string>--cfg</string>
       <string>$HOME/.config/kanata/config.kbd</string>
       <string>--quiet</string>
-    </array>"
-
-kanata_plist="$kanata_plist
-<key>RunAtLoad</key>
+    </array>
+		<key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
     <true/>
