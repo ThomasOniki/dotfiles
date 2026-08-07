@@ -8,6 +8,7 @@ for formula in "bison" "ruby" "openjdk" "rustup" "llvm" "binutils" "curl"; do
 done
 
 PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
+PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
 
 export PATH
 
