@@ -11,7 +11,7 @@ PROMPT="%~ > "
 # This makes sure you don't nest neovim sessions.
 [[ -z "$NVIM" ]] || alias nvim="open -a neovide"
 
-source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 bindkey -v
 bindkey -M vicmd 'n' vi-backward-char
@@ -29,8 +29,8 @@ bindkey -M vicmd 'w' vi-add-next
 
 bindkey -M vicmd 'q' undo
 
-source /opt/homebrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/opt/zsh-autocomplete/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+source $HOMEBREW_PREFIX/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/opt/zsh-autocomplete/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 autoload -Uz edit-command-line
 zle -N edit-command-line

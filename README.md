@@ -26,7 +26,7 @@ This repo contains my config files managed by [GNU stow](https://github.com/aspi
 
 First clone this repo.
 ```sh 
-git clone https://thomasfarci/dotfiles
+git clone https://codeberg.org/ThomasReal/dotfiles.git
 cd dotfiles
 ```
 
