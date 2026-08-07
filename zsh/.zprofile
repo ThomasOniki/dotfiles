@@ -40,9 +40,6 @@ export EM_LLVM_ROOT="$XDG_DATA_HOME/emscripten-llvm-bin/"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
-PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
-
 export PATH
 
 export MANPATH="$XDG_CACHE_HOME/cppman:$MANPATH"
@@ -59,6 +56,7 @@ export STRIP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-strip"
 export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-nm"
 export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/
 export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
+export CMAKE_CXX_COMPILER_LAUNCHER="$HOMEBREW_PREFIX/opt/ccache/bin/ccache"
 
 source $HOME/VulkanSDK/1.4.341.1/setup-env.sh >/dev/null
 
