@@ -1,0 +1,3 @@
+zsh/.zshrc    $HOME/.zshrc
+zsh/.zshenv   $HOME/.zshenv
+zsh/.zprofile $HOME/.zprofile

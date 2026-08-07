@@ -4,8 +4,8 @@ local spec = {}
 table.insert(spec, {
 	"saghen/blink.cmp",
 	event = "VeryLazy",
-	build = "cargo build --release",
 	dependencies = { "L3MON4D3/LuaSnip" },
+	version = "1.10.2",
 	opts = {
 		sources = { default = { "lsp", "snippets", "buffer", "path", "omni" } },
 		snippets = { preset = "luasnip" },

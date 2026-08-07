@@ -1,4 +1,4 @@
-## Requirements
+== Requirements
 - zsh
 - zsh-fast-syntax-highlighting (this isn't a default package on linux, clone https://github.com/zdharma-continuum/fast-syntax-highlighting[repo] or use zsh-syntax-highlighting)
 - zsh-autocomplete
@@ -7,7 +7,7 @@
 - trash-cli (on macos, /usr/bin/trash comes builtin)
 - zoxide
 
-## Notes
+== Notes
 If you are not on an apple silicon mac using homebrew, you may need to change paths in .zshrc and .zprofile.
 You should also remove the environement variables and aliases for things you don't use.
 For example, chances are you don't use vulkan, so you can remove this line in .zprofile

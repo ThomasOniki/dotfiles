@@ -4,6 +4,9 @@ local spec = {}
 table.insert(spec, {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	config = function()
+		vim.treesitter.language.register("bash", "sh")
+	end,
 })
 
 vim.api.nvim_create_autocmd("User", {
