@@ -1,24 +1,10 @@
 fastfetch
 
-alias c="clear"
-alias rm="trash"
+setopt autocd
+setopt correct
+setopt interactivecomments
 
-alias ls="lsd --almost-all"
-alias lsl="lsd --almost-all --long"
-
-fm() {
-	fd --no-ignore --hidden --absolute-path --type=directory --follow . $(manpath 2>/dev/null |
-		sed 's/:/\n/g') 2>/dev/null |
-		rg --color=never '/man[1-9nl]' |
-		xargs fd --no-ignore --hidden --absolute-path --type=file --follow . |
-		sed 's/\(.*\)\.gz/\1/g' |
-		sed 's/.*\/\([^\/]*\)\.\(.*\)/\1(\2)/g' |
-		fzf --query="$@" --preview='man -P "bat --language=man --color=always" "$(sed "s/.*(\(.*\))/\1/g" <<<{})" "$(sed "s/(.*//g" <<<{})"' |
-		sed 's/\(.*\)(\(.*\))/\2 "\1"/g' 2>/dev/null |
-		xargs man
-}
-
-PROMPT="%~ > "
+PROMPT="%~ ❯ "
 
 # This makes sure you don't nest neovim sessions.
 [[ -z "$NVIM" ]] || alias nvim="open -a neovide"
@@ -53,3 +39,31 @@ eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 
 export FZF_DEFAULT_COMMAND='rg --hidden --files'
+
+alias c="clear"
+alias d="trash"
+alias rm="echo use d (an alias for trash) instead of rm."
+
+alias l="lsd --almost-all"
+alias ll="lsd --almost-all --long --human-readable"
+
+h() {
+	$@ --help | nvim +Man!
+}
+
+fm() {
+	files=$(manpath |
+		tr '::' ':' | tr ':' '\0' |
+		xargs -0 fd --no-ignore --hidden --type directory 'man([0-9]|3[a-z]*)' |
+		tr '\n' '\0' |
+		xargs -0 fd --no-ignore --hidden --type file .)
+
+	local entries=""
+	local pad=$((COLUMNS / 6))
+	while IFS= read -r file; do
+		fname="${file##*/}"
+		entries+="$(printf "%-${pad}s - %s" "$fname" "$file")
+"
+	done <<<"$files"
+	fzf <<<"$entries"
+}
