@@ -83,6 +83,7 @@ use_brew_llvm_toolchain() {
 	export LD="lld" CC_LD="lld" CXX_LD="lld"
 	export STRIP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-strip"
 	export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-nm"
+	export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
 }
 
 use_brew_gcc_toolchain() {
@@ -96,6 +97,7 @@ use_brew_gcc_toolchain() {
 	export LD="gold" CC_LD="gold" CXX_LD="gold"
 	export STRIP="$HOMEBREW_PREFIX/opt/binutils/bin/strip"
 	export OBJDUMP="$HOMEBREW_PREFIX/opt/binutils/bin/objdump" NM="$bin/gcc-nm-$ver"
+	export CLANGD="/usr/bin/clangd"
 }
 
 use_system_toolchain() {
@@ -104,4 +106,5 @@ use_system_toolchain() {
 	export LD= CC_LD= CXX_LD=
 	export STRIP="/usr/bin/strip"
 	export OBJDUMP="/usr/bin/objdump" NM="/usr/bin/nm"
+	export CLANGD="/usr/bin/clangd"
 }

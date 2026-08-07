@@ -17,7 +17,7 @@ local function configure_lsps()
   })
 
   vim.lsp.config("clangd", {
-    cmd = { "clangd", "--header-insertion=never", "--function-arg-placeholders=0" },
+    cmd = { os.getenv("CLANGD") or "clangd", "--header-insertion=never", "--function-arg-placeholders=0" },
     root_markers = { ".clangd", "compile_commands.json", ".git" },
   })
   vim.lsp.enable("clangd")
