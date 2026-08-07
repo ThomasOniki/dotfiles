@@ -3,4 +3,4 @@ if ! [[ -d ~/.tmux/plugins/tpm ]]; then
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-tmux source $HOME/.tmux.conf
+tmux source $HOME/.tmux.conf 2>/dev/null

@@ -1,1 +1,1 @@
-tmux/.tmux.conf ~/.tmux.conf
+tmux/ $XDG_CONFIG_HOME/tmux
