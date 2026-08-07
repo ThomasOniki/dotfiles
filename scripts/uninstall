@@ -10,7 +10,7 @@ cd ..
 
 kernel="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
-source scripts/get-cfg-dir.sh
+source scripts/helpers.bash
 
 for module in "$@"; do
 	if ! [[ -d "./$module" ]]; then
@@ -20,16 +20,16 @@ for module in "$@"; do
 
 	if [[ -f "scripts/symlink-paths/$module.txt" ]]; then
 		while read src dst; do
-			eval "source scripts/try_revert_ln.sh \"$src\" \"$dst\""
+			eval "try_revert_ln  \"$src\" \"$dst\""
 		done <"scripts/symlink-paths/$module.txt"
 	else
-		source scripts/try_revert_ln.sh "$module" "$XDG_CONFIG_HOME/$module"
+		try_revert_ln "$module" "$cfg_home/$module"
 	fi
 
-	if [[ -f "scripts/uninstall-scripts/$module.sh" ]]; then
-		source "scripts/uninstall-scripts/$module.sh"
+	if [[ -f "scripts/uninstall-scripts/$module.bash" ]]; then
+		source "scripts/uninstall-scripts/$module.bash"
 	fi
-	if [[ -f "scripts/uninstall-scripts/$module-$kernel.sh" ]]; then
-		source "scripts/uninstall-scripts/$module-$kernel.sh"
+	if [[ -f "scripts/uninstall-scripts/$module-$kernel.bash" ]]; then
+		source "scripts/uninstall-scripts/$module-$kernel.bash"
 	fi
 done
