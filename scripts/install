@@ -37,9 +37,9 @@ for module in "$@"; do
 	fi
 
 	if [[ -f "scripts/install-scripts/$module.bash" ]]; then
-		source "scripts/install-scripts/$module.bash"
+		bash "scripts/install-scripts/$module.bash"
 	fi
 	if [[ -f "scripts/install-scripts/$module-$kernel.bash" ]]; then
-		source "scripts/install-scripts/$module-$kernel.bash"
+		bash "scripts/install-scripts/$module-$kernel.bash"
 	fi
 done
