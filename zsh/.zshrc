@@ -4,9 +4,9 @@ setopt autocd
 setopt correct
 setopt interactivecomments
 setopt sharehistory
-setopt appendhistory
+setopt promptsubst
 
-PROMPT="%~ ❯ "
+PROMPT='%(?..%F{red}%B(%?%)%f%b )%~ ❯ '
 HISTFILE="$XDG_STATE_HOME/zsh_history"
 
 source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
