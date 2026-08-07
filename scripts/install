@@ -33,7 +33,7 @@ for module in "$@"; do
 			eval "try_ln $src $dst"
 		done <"scripts/symlink-paths/$module.txt"
 	else
-		try_ln "$module" "$cfg_home/$module"
+		try_ln "$module" "$XDG_CONFIG_HOME/$module"
 	fi
 
 	if [[ -f "scripts/install-scripts/$module.bash" ]]; then

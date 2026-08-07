@@ -23,7 +23,7 @@ for module in "$@"; do
 			eval "try_revert_ln $src $dst"
 		done <"scripts/symlink-paths/$module.txt"
 	else
-		try_revert_ln "$module" "$cfg_home/$module"
+		try_revert_ln "$module" "$XDG_CONFIG_HOME/$module"
 	fi
 
 	if [[ -f "scripts/uninstall-scripts/$module.bash" ]]; then

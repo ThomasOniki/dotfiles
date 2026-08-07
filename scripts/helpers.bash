@@ -37,8 +37,4 @@ try_revert_ln() {
 	restore_backup "$2"
 }
 
-if [[ -z "$XDG_CONFIG_HOME" ]]; then
-	cfg_home="$HOME/.config"
-else
-	cfg_home="$XDG_CONFIG_HOME"
-fi
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
