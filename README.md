@@ -32,10 +32,10 @@ cd dotfiles
 
 This repositorie contains many modules (folders) that can be installed by running:
 ```sh
-stow <module>
+scripts/setup.sh <module>
 ```
 
-You can see modules specific notes and requirements in docs/<module>.md
+You can see modules specific notes in docs/<module>.md
 
 When you run this stow command, it symlinks the files in the <module> directory to the corresponding location in the home folder. 
 For example, if you have `example/foo/bar` and you run stow example, it will link bar to `$HOME/foo/bar`. 
@@ -54,3 +54,4 @@ Note that by default, it links to the parent directory from which stow was run, 
 ```sh
 stow -D <module>
 ```
+There may be additional stuff to do, see docs/<module>.md
