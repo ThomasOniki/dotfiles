@@ -57,6 +57,8 @@ export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX
 export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/
 export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
 export CMAKE_CXX_COMPILER_LAUNCHER="$HOMEBREW_PREFIX/opt/ccache/bin/ccache"
+export CMAKE_GENERATOR=Ninja
+export CMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 source $HOME/VulkanSDK/1.4.341.1/setup-env.sh >/dev/null
 
