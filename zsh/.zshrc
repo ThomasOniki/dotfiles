@@ -46,6 +46,10 @@ alias ll="lsd --almost-all --long --human-readable"
 
 alias nvim="echo Use the alias v instead."
 alias v="command nvim"
+alias vimhost="v --cmd 'let g:live_share_username=\"host\"'"
+
+alias q="exit"
+alias exit="echo Use the alias q instead"
 
 h() {
 	$@ --help | v +Man!
@@ -53,13 +57,14 @@ h() {
 
 fm() {
 	local IFS=" "
-	entry=$(manpath |
-		tr '::' ':' | tr ':' '\0' |
-		xargs -0 fd --no-ignore --hidden --type directory 'man([0-9]|3[a-z]*)' |
-		tr '\n' '\0' |
-		xargs -0 fd --no-ignore --hidden --type file . |
-		sed 's/\(.*\)\/\([^/]*\)/\2    \1/' | fzf --query="$*" --preview='entry={}
-mandoc "/${entry#*    /}/${entry%%    /*}" | bat --language=man --color=always')
+	entry=$(
+		manpath |
+			tr '\n' ':' |
+			sed 's/::*/:/g' |
+			tr ':' '\0' |
+			xargs -0 fd --no-ignore --hidden --type file --full-path --follow '^.*/man([0-9]|3[a-z]*)/[^/]*\.([0-9]|3[a-z]*)(\.gz)?$' |
+			sed 's/\(.*\)\/\([^/]*\)/\2    \1/' | fzf --query="$*" --preview='entry={}; mandoc "/${entry#*    /}/${entry%%    /*}" | bat --language=man --color=always'
+	)
 
 	[[ -z "$entry" ]] || mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
 }
