@@ -26,7 +26,7 @@ try_revert_ln() {
 		exit 1
 	fi
 
-	if [[ "$(realpath \"$2\")" != "$(realpath \"$1\")" ]]; then
+	if [[ "$(realpath "$2")" != "$(realpath "$1")" ]]; then
 		echo "$2 was not a symlink for $1, not deleting it."
 		exit 1
 	fi
