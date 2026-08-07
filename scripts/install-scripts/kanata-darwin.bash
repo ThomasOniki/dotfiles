@@ -89,8 +89,8 @@ karabiner_vhid_plist='<?xml version="1.0" encoding="UTF-8"?>
 
 echo 'Creating launch daemons for kanata and the karabiner vhid, this may require your password.
 '
-echo "$karabiner_vhid_plist" | sudo tee '/Library/LaunchDaemons/org.keymap.karabiner-vhid.plist' >/dev/null
-echo "$kanata_plist" | sudo tee '/Library/LaunchDaemons/org.keymap.kanata.plist' >/dev/null
+sudo tee '/Library/LaunchDaemons/org.keymap.karabiner-vhid.plist' >/dev/null <<<"$karabiner_vhid_plist"
+sudo tee '/Library/LaunchDaemons/org.keymap.kanata.plist' >/dev/null <<<"$kanata_plist"
 
 sudo launchctl bootstrap system '/Library/LaunchDaemons/org.keymap.karabiner-vhid.plist'
 sudo launchctl bootstrap system '/Library/LaunchDaemons/org.keymap.kanata.plist'
