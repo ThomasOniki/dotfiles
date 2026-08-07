@@ -1,5 +1,15 @@
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GOPATH="$XDG_DATA_HOME/go"
+export GOBIN="$GOPATH/bin"
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
@@ -12,7 +22,7 @@ PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
 
 export PATH
 
-export MANPATH="$HOME/.cache/cppman:$MANPATH"
+export MANPATH="$XDG_CACHE_HOME/cppman:$MANPATH"
 
 export EDITOR="nvim"
 export PAGER="bat"
