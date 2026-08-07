@@ -21,35 +21,38 @@ local function configure_lsps()
   })
 end
 
-return {
-  {
+---@type LazyPluginSpec[]
+local spec = {}
+
+table.insert(spec, {
+  "mason-org/mason.nvim",
+  opts_extend = { "ensure_installed" },
+  opts = {
+    ensure_installed = {
+      "clangd",
+      "rust-analyzer",
+      "lua-language-server",
+      "bash-language-server",
+      "pyright",
+      "ruff",
+      "jdtls",
+      "mesonlsp",
+    },
+  },
+})
+
+table.insert(spec, {
+  "neovim/nvim-lspconfig",
+  config = configure_lsps,
+})
+
+table.insert(spec, {
+  "mason-org/mason-lspconfig.nvim",
+  opts = {},
+  dependencies = {
     "mason-org/mason.nvim",
-    opts_extend = { "ensure_installed" },
-    opts = {
-      ensure_installed = {
-        "clangd",
-        "rust-analyzer",
-        "lua-language-server",
-        "bash-language-server",
-        "pyright",
-        "ruff",
-        "jdtls",
-        "mesonlsp",
-      },
-    },
-  },
-
-  {
     "neovim/nvim-lspconfig",
-    config = configure_lsps,
   },
+})
 
-  {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {},
-    dependencies = {
-      "mason-org/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-  },
-}
+return spec
