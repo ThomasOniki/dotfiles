@@ -44,7 +44,7 @@ alias c="clear"
 alias d="trash"
 alias rm="echo use d (an alias for trash) instead of rm."
 
-ll() { lsd -lAh --color=always --icon=always $@ | bat --plain; }
+ll() { lsd -lAh --color=always --icon=always "$@" | bat --plain; }
 alias l="lsd -A"
 
 alias nvim="echo Use the alias v instead."
@@ -55,6 +55,9 @@ alias bwul='export BW_SESSION="$(bw unlock --raw)"'
 
 alias q="builtin exit"
 alias exit="echo Use the alias q instead"
+
+alias lcc="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
+alias lc++="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
 
 h() {
 	$@ --help | v +Man!
