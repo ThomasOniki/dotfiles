@@ -41,7 +41,6 @@
   layers  (layer-switch layers)
   qwerty  (layer-switch qwerty)
   base    (layer-switch base)
-  nil     (layer-switch nil)
 
   caps-base (tap-hold $tap-time $hold-time caps @base)
 
@@ -93,15 +92,6 @@
    XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
             XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
    XX           @qwerty  XX       XX       XX       @base    XX       XX       XX       XX       XX       XX       XX   XX
-   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-   XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-   XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
-)
-
-(deflayer nil
-   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-            XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX   XX
    XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
    XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
    XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
