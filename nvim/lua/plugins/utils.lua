@@ -84,18 +84,6 @@ table.insert(spec, {
 })
 
 table.insert(spec, {
-  "rmagatti/auto-session",
-  dependencies = {},
-  opts = {
-    auto_restore_last_session = true,
-    auto_delete_empty_sessions = false,
-    session_lens = {
-      picker = "fzf",
-    },
-  },
-})
-
-table.insert(spec, {
   "willothy/flatten.nvim",
   opts = {},
 })
