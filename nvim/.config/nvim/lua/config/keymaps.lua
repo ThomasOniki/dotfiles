@@ -92,7 +92,7 @@ map({ "v" }, "<leader>p", '"_dP', { desc = "Paste without coping overwritten tex
 map({ "n", "i", "s" }, "<Esc>", "<Esc><cmd>noh<CR>", { desc = "Escape and :noh" })
 
 map("n", "<leader>w", "<cmd>up<CR>", { desc = "Save buffer" })
-map("n", "<leader>W", "<cmd>up<CR>", { desc = "Save all buffers" })
+map("n", "<leader>W", "<cmd>wa<CR>", { desc = "Save all buffers" })
 map("n", "<leader>x", "<cmd>up|bd<CR>", { desc = "Save and close buffer" })
 map("n", "<leader>X", "<cmd>bw!<CR>", { desc = "Force quit buffer without saving" })
 map("n", "<leader>q", "<cmd>wqa<CR>", { desc = "Save and close all buffers" })
