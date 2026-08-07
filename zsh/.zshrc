@@ -73,3 +73,32 @@ fm() {
 
 	[[ -z "$entry" ]] || mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
 }
+
+use_brew_llvm_toolchain() {
+	export AS="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-as" CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang" CXX="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
+	export AR="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ar" RANLIB="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ranlib"
+	export LD="lld" CC_LD="lld" CXX_LD="lld"
+	export STRIP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-strip"
+	export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-nm"
+}
+
+use_brew_gcc_toolchain() {
+	local bin="$(fd --type=directory --exact-depth=2 --follow --absolute-path --full-path "^$HOMEBREW_PREFIX/opt/gcc@[0-9]*/bin$" "$HOMEBREW_PREFIX/opt" |
+		sort --version-sort | tail -1)"
+	bin="${bin%/}"
+	local ver="${bin##*gcc@}"
+	ver="${ver%/bin}"
+	export AS="/usr/bin/as" CC="$bin/gcc-$ver" CXX="$bin/g++-$ver"
+	export AR="$bin/gcc-ar-$ver" RANLIB="$bin/gcc-ranlib-$ver"
+	export LD="gold" CC_LD="gold" CXX_LD="gold"
+	export STRIP="$HOMEBREW_PREFIX/opt/binutils/bin/strip"
+	export OBJDUMP="$HOMEBREW_PREFIX/opt/binutils/bin/objdump" NM="$bin/gcc-nm-$ver"
+}
+
+use_system_toolchain() {
+	export AS="/usr/bin/as" CC="/usr/bin/clang" CXX="/usr/bin/clang++"
+	export AR="/usr/bin/ar" RANLIB="/usr/bin/ranlib"
+	export LD= CC_LD= CXX_LD=
+	export STRIP="/usr/bin/strip"
+	export OBJDUMP="/usr/bin/objdump" NM="/usr/bin/nm"
+}
