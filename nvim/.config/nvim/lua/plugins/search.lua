@@ -52,6 +52,7 @@ return {
     dependencies = { "nvim-mini/mini.icons", "rmagatti/auto-session" },
     opts = { grep = { rg_opts = "--color=always --line-number --column --hidden" } },
     keys = fzf_keys,
+    cmd = { "FzfLua" },
   },
   {
     "MagicDuck/grug-far.nvim",
