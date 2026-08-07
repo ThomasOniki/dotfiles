@@ -42,6 +42,11 @@ scripts/setup.sh <module>
 ----
 
 You can see modules specific notes in docs/<module>.md
+The setup script runs
+[source,sh]
+----
+stow module
+----
 
 When you run this stow command, it symlinks the files in the <module> directory to the corresponding location in the home folder. 
 For example, if you have `example/foo/bar` and you run stow example, it will link bar to `$HOME/foo/bar`. 
@@ -51,10 +56,13 @@ This means that if you already have some config files that are also here, you wi
 ----
 mv ~/.zshrc ~/.zshrc.bak
 mv ~/.zshenv ~/.zshenv.bak
+mv ~/.zprofile ~/.zprofile.bak
 cd path/to/cloned/dotfiles
-stow zsh
+scripts/setup.sh zsh
 ----
 Note that by default, it links to the parent directory from which stow was run, so not nessarily `$HOME`, but here I privided the file xref:.stowrc[.stowrc] which sets an option to make it the always home folder. 
+
+After the script has run stow, it will check for `scripts/setup-module-<platform>.sh` and run it if it exists.
 
 
 == Uninstall
