@@ -4,14 +4,14 @@ PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
 for formula in "bison" "ruby" "openjdk" "rustup" "llvm" "binutils" "curl"; do
-  PATH="$HOMEBREW_PREFIX/opt/$formula/bin:$PATH"
+	PATH="$HOMEBREW_PREFIX/opt/$formula/bin:$PATH"
 done
 
 export PATH
 
 export EDITOR="$HOMEBREW_PREFIX/bin/nvim"
-export PAGER="$HOMEBREW_PREFIX/opt/page/bin/page -WfC -q 90000 -z 90000"
-export MANPAGER="$HOMEBREW_PREFIX/opt/page/bin/page -t man"
+export PAGER="$HOMEBREW_PREFIX/bin/nvim +Man\!"
+export MANPAGER="$HOMEBREW_PREFIX/bin/nvim +Man\!"
 
 export CC="clang"
 export CXX="clang++"
