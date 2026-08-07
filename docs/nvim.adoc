@@ -26,17 +26,20 @@ require("config.colorschemes").edge()
 Change this to your prefered colorscheme.
 
 === Keymaps
-Add keymaps to xref:../nvim/.config/nvim/lua/config/keymaps.lua[keymaps.lua]. If you use colemak dh, add colemak specific mappings to the map_colemak function and unmap them in unmap_colemak. If you don't use colemak, change this line in xref:../nvim/.config/nvim/init.lua[init.lua]
+There is a table in xref:../nvim/.config/nvim/lua/config/keymaps.lua[keymaps.lua] called `mappings` that you can add to. It is a dictionary with each value being a list of mappings. Each list can be indenpendly mapped and unmapped using the functions `map` and `unmap`. If you want to use the functions outside of keymaps.lua, use `require("config.keymaps").{map, unmap}("<mapping_name>")`. Each mapping follows the LazyKeys syntax: [1] is lhs, [2] is rhs, mode, if present specifies the modes (otherwise it defaults to "n") and all other entries are put into opts. For example,
 [source,lua]
 ----
-require("config.keymaps").colemak()
+vim.keymap.set("i", "a", "b", { desc = "Example mapping 1" })
+vim.keymap.set("v", "c", "d", { desc = "Example mapping 2" })
 ----
-to
+can be written as
 [source,lua]
 ----
-require("config.keymaps").qwerty()
+mappings.example_mapping_list = {
+  { "a", "b", desc = "Example mapping 1", mode = "i"},
+  { "c", "d", desc = "Example mapping 2", mode = "i"},
+}
 ----
-or remove the colemak functions entirely.
 
 == Useful mappings and commands
 === Colemak
