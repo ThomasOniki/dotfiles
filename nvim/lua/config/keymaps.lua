@@ -98,7 +98,7 @@ map("n", "<leader>X", "<cmd>bw!<CR>", { desc = "Force quit buffer without saving
 map("n", "<leader>q", "<cmd>wqa<CR>", { desc = "Save and close all buffers" })
 map("n", "<leader>Q", "<cmd>qa!<CR>", { desc = "Force quit all buffers without saving" })
 
-map("n", "<leader>t", "<cmd>term<CR>", { desc = "Open terminal buffer" })
+map("n", "<leader>t", "<cmd>term<CR>i", { desc = "Open terminal buffer" })
 
 map("i", "<esc>", function()
   vim.notify(
