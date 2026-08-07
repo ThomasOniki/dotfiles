@@ -48,17 +48,18 @@ alias nvim="echo Use the alias v instead."
 alias v="command nvim"
 
 h() {
-	$@ --help | nvim +Man!
+	$@ --help | v +Man!
 }
 
 fm() {
+	local IFS=" "
 	entry=$(manpath |
 		tr '::' ':' | tr ':' '\0' |
 		xargs -0 fd --no-ignore --hidden --type directory 'man([0-9]|3[a-z]*)' |
 		tr '\n' '\0' |
 		xargs -0 fd --no-ignore --hidden --type file . |
-		sed 's/\(.*\)\/\([^/]*\)/\2    \1/' | fzf --preview='entry={}
-	mandoc "/${entry#*    /}/${entry%%    /*}" | bat --language=man --color=always')
+		sed 's/\(.*\)\/\([^/]*\)/\2    \1/' | fzf --query="$*" --preview='entry={}
+mandoc "/${entry#*    /}/${entry%%    /*}" | bat --language=man --color=always')
 
-	mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
+	[[ -z "$entry" ]] || mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
 }
