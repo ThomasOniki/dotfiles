@@ -7,6 +7,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CCACHE_DIR="$XDG_CACHE_HOME/ccache"
 export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$GOPATH/bin"
 export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
