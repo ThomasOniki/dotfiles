@@ -7,7 +7,7 @@ table.insert(spec, {
 	build = "cargo build --release",
 	dependencies = { "L3MON4D3/LuaSnip" },
 	opts = {
-		sources = { default = { "lsp", "snippets", "buffer", "path" } },
+		sources = { default = { "lsp", "snippets", "buffer", "path", "omni" } },
 		snippets = { preset = "luasnip" },
 		signature = { enabled = true },
 		fuzzy = { implementation = "rust" },
