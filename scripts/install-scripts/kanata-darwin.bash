@@ -42,6 +42,9 @@ echo "If you cloned this repo to a protected location (eg. ~/Desktop), please al
 echo "This is needed because otherwise kanata won't have permission to read your protected config file."
 open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
 
+echo "kanata also needs Accessibility permissions"
+open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
+
 kanata_plist='<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
