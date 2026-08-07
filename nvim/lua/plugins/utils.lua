@@ -95,4 +95,9 @@ table.insert(spec, {
   },
 })
 
+table.insert(spec, {
+  "willothy/flatten.nvim",
+  opts = {},
+})
+
 return spec
