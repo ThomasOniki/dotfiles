@@ -6,9 +6,6 @@ setopt interactivecomments
 
 PROMPT="%~ ❯ "
 
-# This makes sure you don't nest neovim sessions.
-[[ -z "$NVIM" ]] || alias nvim="open -a neovide"
-
 source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 bindkey -v
@@ -35,8 +32,8 @@ zle -N edit-command-line
 
 bindkey '^e' edit-command-line
 
-eval "$(zoxide init zsh)"
-eval "$(fzf --zsh)"
+source <(zoxide init zsh)
+source <(fzf --zsh)
 
 export FZF_DEFAULT_COMMAND='rg --hidden --files'
 
@@ -47,23 +44,21 @@ alias rm="echo use d (an alias for trash) instead of rm."
 alias l="lsd --almost-all"
 alias ll="lsd --almost-all --long --human-readable"
 
+alias nvim="echo Use the alias v instead."
+alias v="command nvim"
+
 h() {
 	$@ --help | nvim +Man!
 }
 
 fm() {
-	files=$(manpath |
+	entry=$(manpath |
 		tr '::' ':' | tr ':' '\0' |
 		xargs -0 fd --no-ignore --hidden --type directory 'man([0-9]|3[a-z]*)' |
 		tr '\n' '\0' |
-		xargs -0 fd --no-ignore --hidden --type file .)
+		xargs -0 fd --no-ignore --hidden --type file . |
+		sed 's/\(.*\)\/\([^/]*\)/\2    \1/' | fzf --preview='entry={}
+	mandoc "/${entry#*    /}/${entry%%    /*}" | bat --language=man --color=always')
 
-	local entries=""
-	local pad=$((COLUMNS / 6))
-	while IFS= read -r file; do
-		fname="${file##*/}"
-		entries+="$(printf "%-${pad}s - %s" "$fname" "$file")
-"
-	done <<<"$files"
-	fzf <<<"$entries"
+	mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
 }
