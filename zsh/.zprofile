@@ -12,11 +12,14 @@ export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$GOPATH/bin"
 export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
 export NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
 export PYTHONUSERBASE="$XDG_DATA_HOME/python"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
 # This is to make emscan-deps not report an error there is no bundled clang-scan-deps in the
 # default emscripten llvm. To get the emscripten-llvm-bin directory, run:
