@@ -65,7 +65,7 @@ kanata_plist="$kanata_plist
       <string>$(command -v kanata)</string>
       <string>--cfg</string>
       <string>$HOME/.config/kanata/config.kbd</string>
-      <string>--quiet/string>
+      <string>--quiet</string>
     </array>"
 
 kanata_plist="$kanata_plist
@@ -87,7 +87,7 @@ karabiner_vhid_plist='<?xml version="1.0" encoding="UTF-8"?>
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>org.keymap.karabiner-vhiddaemon</string>
+    <string>org.keymap.karabiner-vhid</string>
     <key>ProgramArguments</key>
     <array>
         <string>/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon</string>
