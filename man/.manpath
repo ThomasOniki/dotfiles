@@ -1,0 +1,8 @@
+DEFINE pager nvim +Man!
+
+MANDATORY_MANPATH	/Users/thomas/.cache/cppman
+MANDB_MAP			/Users/thomas/.cache/cppman	/Users/thomas/.cache/cppman/manindex
+
+MANDATORY_MANPATH /Applications/Xcode.app/Contents/Developer/usr/share/man
+MANDATORY_MANPATH /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man
+MANDATORY_MANPATH /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man

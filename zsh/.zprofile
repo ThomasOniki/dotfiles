@@ -7,11 +7,14 @@ for formula in "bison" "ruby" "openjdk" "rustup" "llvm" "binutils" "curl"; do
 	PATH="$HOMEBREW_PREFIX/opt/$formula/bin:$PATH"
 done
 
+for formula in "man-db" "make"; do
+	PATH="$HOMEBREW_PREFIX/opt/$formula/libexec/bin:$PATH"
+done
+
 export PATH
 
 export EDITOR="$HOMEBREW_PREFIX/bin/nvim"
 export PAGER="$HOMEBREW_PREFIX/bin/nvim +Man\!"
-export MANPAGER="$HOMEBREW_PREFIX/bin/nvim +Man\!"
 
 export CC="clang"
 export CXX="clang++"
