@@ -2,59 +2,54 @@
 local spec = {}
 
 table.insert(spec, {
-  "stevearc/conform.nvim",
-  opts = {
-    formatters_by_ft = {
-      c = { "clang_format" },
-      cpp = { "clang_format" },
-      objc = { "clang_format" },
-      objcpp = { "clang_format" },
-      cuda = { "clang_format" },
+	"stevearc/conform.nvim",
+	opts = {
+		formatters_by_ft = {
+			c = { "clang_format" },
+			cpp = { "clang_format" },
+			objc = { "clang_format" },
+			objcpp = { "clang_format" },
+			cuda = { "clang_format" },
 
-      lua = { "stylua" },
+			lua = { "stylua" },
 
-      cmake = { "cmake_format" },
+			cmake = { "cmake_format" },
 
-      sh = { "shfmt" },
-      zsh = { "shfmt" },
+			sh = { "shfmt" },
+			zsh = { "shfmt" },
 
-      rust = { "rustfmt" },
-    },
+			rust = { "rustfmt" },
+		},
 
-    formatters = {
-      clang_format = {
-        prepend_args = { "--style=file" },
-      },
-      stylua = {
-        prepend_args = {
-          "--indent-type",
-          "Spaces",
-          "--indent-width",
-          "2",
-        },
-      },
-      cmake_format = {},
-    },
+		formatters = {
+			clang_format = {
+				prepend_args = { "--style=file" },
+			},
+			stylua = {
+				prepend_args = {},
+			},
+			cmake_format = {},
+		},
 
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_fallback = true,
-    },
-  },
-  event = "BufWritePre",
+		format_on_save = {
+			timeout_ms = 500,
+			lsp_fallback = true,
+		},
+	},
+	event = "BufWritePre",
 })
 
 table.insert(spec, {
-  "mason-org/mason.nvim",
-  opts_extend = { "ensure_installed" },
-  opts = {
-    ensure_installed = {
-      "clang-format",
-      "stylua",
-      "shfmt",
-      "cmakelang",
-    },
-  },
+	"mason-org/mason.nvim",
+	opts_extend = { "ensure_installed" },
+	opts = {
+		ensure_installed = {
+			"clang-format",
+			"stylua",
+			"shfmt",
+			"cmakelang",
+		},
+	},
 })
 
 return spec
