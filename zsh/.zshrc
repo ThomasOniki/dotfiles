@@ -59,6 +59,16 @@ alias exit="echo Use the alias q instead"
 alias lcc="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
 alias lc++="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
 
+[[ -z "$NVIM" ]] || function man() {
+	# used for completions
+	if [[ "$*" = --- ]]; then
+		command man ---
+		return
+	fi
+
+	v --server "$NVIM" --remote-send "<cmd>hide Man $*<cr>"
+}
+
 h() {
 	$@ --help | v +Man!
 }
