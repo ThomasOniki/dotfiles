@@ -33,6 +33,8 @@ table.insert(spec, {
   end,
 })
 
+table.insert(spec, { "lewis6991/gitsigns.nvim", opts = {} })
+
 table.insert(spec, {
   "3rd/image.nvim",
   opts = {},
