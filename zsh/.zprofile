@@ -39,6 +39,7 @@ export EM_LLVM_ROOT="$XDG_DATA_HOME/emscripten-llvm-bin/"
 
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
+PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
 
 export PATH
 
