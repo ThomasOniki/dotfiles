@@ -57,6 +57,7 @@ export STRIP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-strip"
 export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-nm"
 export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/
 export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
+export CFLAGS="-pipe" CXXFLAGS="-pipe" OBJCFLAGS="-pipe" OBJCXXFLAGS="-pipe"
 export CMAKE_CXX_COMPILER_LAUNCHER="$HOMEBREW_PREFIX/opt/ccache/bin/ccache"
 export CMAKE_GENERATOR=Ninja
 export CMAKE_EXPORT_COMPILE_COMMANDS=ON
