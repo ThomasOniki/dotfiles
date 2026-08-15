@@ -44,7 +44,8 @@ alias c="clear"
 alias d="trash"
 alias rm="echo use d (an alias for trash) instead of rm."
 
-ll() { lsd -lAh --color=always --icon=always "$@" | bat --plain; }
+po() { output=$("$@") && bat <<<"$output"; }
+alias ll="po lsd -lAh --color=always --icon=always"
 alias l="lsd -A"
 
 alias nvim="echo Use the alias v instead."
