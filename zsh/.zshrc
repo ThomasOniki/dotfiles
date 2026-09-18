@@ -62,6 +62,16 @@ alias lc++="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
 alias dis='po $OBJDUMP --disassemble --disassembler-color=on'
 alias ctestat='ctest --output-on-failure --timeout=20s --test-dir'
 
+samplegraph() {
+	exe="$1"
+	shift
+	sample "${exe##*/}" -wait -f "$HOME/.cache/sample.out" -fullPaths 2>/dev/null &
+	"$exe" "$@"
+	wait
+	stackcollapse-sample.awk <"$HOME/.cache/sample.out" | flamegraph.pl >"$HOME/.cache/flamegraph.svg"
+	librewolf "$HOME/.cache/flamegraph.svg"
+}
+
 [[ -z "$NVIM" ]] || function man() {
 	# used for completions
 	if [[ "$*" = --- ]]; then
