@@ -1,0 +1,15 @@
+#TabsToolbar { display: none !important; }
+#sidebar-box #sidebar-header { display: none !important; }
+
+:root {
+  --arrowpanel-border-radius: 0 !important;
+  --tab-border-radius: 0 !important;
+  --toolbarbutton-border-radius: 0 !important;
+  --arrowpanel-menuitem-border-radius: 0 !important;
+}
+
+* { 
+  border-radius: 0px !important;
+  font-family: "Agave Nerd Font" !important;
+  font-size: 20 !important; 
+}
