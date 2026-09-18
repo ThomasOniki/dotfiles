@@ -64,5 +64,3 @@ export CMAKE_GENERATOR=Ninja
 export CMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 source $HOME/VulkanSDK/1.4.341.1/setup-env.sh >/dev/null
-
-export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
