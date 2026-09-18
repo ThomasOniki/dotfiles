@@ -1,0 +1,10 @@
+= Librewolf/Firefox configuration
+
+== Profiles
+By default, the install script will alter all default profiles for all librewolf installations found in installs.ini. You can explicitely specify the profiles by setting the `LIBREWOLF_PROFILES` environment variable. If your installs.ini isn't in `~/.librewolf/` or `~/Library/Application Support/librewolf`, you also need to set `LIBREWOLF_ROOT`.
+
+== Sideberry
+The link:https://addons.mozilla.org/en-US/firefox/addon/sidebery/[sideberry] configuration can be installed by going into the sideberry settings and selecting `Import addon data` at the very bottom of the page.
+
+== Vimium
+link:https://vimium.github.io/[Vimium] settings can also be imported/exported on the options page.
