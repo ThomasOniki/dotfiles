@@ -60,6 +60,7 @@ alias exit="echo Use the alias q instead"
 alias lcc="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
 alias lc++="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
 alias dis='po $OBJDUMP --disassemble --disassembler-color=on'
+alias ctestat='ctest --output-on-failure --timeout=20s --test-dir'
 
 [[ -z "$NVIM" ]] || function man() {
 	# used for completions
