@@ -45,14 +45,13 @@ open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFile
 echo "kanata also needs Accessibility permissions"
 open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
 
-kanata_plist='<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
- "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+kanata_plist="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\"
+ \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
   <dict>
     <key>Label</key>
-    <string>org.keymap.kanata</string>'"
-		$kanata_plist
+    <string>sh.dotfiles.kanata</string>
     <key>ProgramArguments</key>
     <array>
       <string>$(command -v kanata)</string>
@@ -66,10 +65,10 @@ kanata_plist='<?xml version="1.0" encoding="UTF-8"?>
     <true/>
 
     <key>StandardOutPath</key>
-    <string>$HOME/Library/Logs/kanata_stdout.log</string>
+    <string>$HOME/Library/Logs/kanata.log</string>
 
     <key>StandardErrorPath</key>
-    <string>$HOME/Library/Logs/kanata_stderr.log</string>
+    <string>$HOME/Library/Logs/kanata.log</string>
   </dict>
 </plist>"
 
@@ -78,7 +77,7 @@ karabiner_vhid_plist='<?xml version="1.0" encoding="UTF-8"?>
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>org.keymap.karabiner-vhid</string>
+    <string>sh.dotfiles.karabiner-vhid</string>
     <key>ProgramArguments</key>
     <array>
         <string>/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon</string>
@@ -92,11 +91,11 @@ karabiner_vhid_plist='<?xml version="1.0" encoding="UTF-8"?>
 
 echo 'Creating launch daemons for kanata and the karabiner vhid, this may require your password.
 '
-sudo tee '/Library/LaunchDaemons/org.keymap.karabiner-vhid.plist' >/dev/null <<<"$karabiner_vhid_plist"
-sudo tee '/Library/LaunchDaemons/org.keymap.kanata.plist' >/dev/null <<<"$kanata_plist"
+sudo tee '/Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist' >/dev/null <<<"$karabiner_vhid_plist"
+sudo tee '/Library/LaunchDaemons/sh.dotfiles.kanata.plist' >/dev/null <<<"$kanata_plist"
 
-sudo launchctl bootstrap system '/Library/LaunchDaemons/org.keymap.karabiner-vhid.plist'
-sudo launchctl bootstrap system '/Library/LaunchDaemons/org.keymap.kanata.plist'
+sudo launchctl bootstrap system '/Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist'
+sudo launchctl bootstrap system '/Library/LaunchDaemons/sh.dotfiles.kanata.plist'
 
 echo 'Sleeping 10 seconds to let kanata get ready...
 '
@@ -104,7 +103,7 @@ sleep 10
 echo 'Your keyboard should now be remapped.
 
 If you find that you can'\''t type anything, go to System Settings -> Accessibility -> Keyboard and enable Accessibility Keyboard temporarily for troubleshooting.
-You can also try deleting the LaunchDaemons /Library/LaunchDaemons/org.keymap.karabiner-vhid.plist and /Library/LaunchDaemons/org.keymap.kanata.plist.
+You can also try deleting the LaunchDaemons /Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist and /Library/LaunchDaemons/sh.dotfiles.kanata.plist.
 After a reboot, they should stop.
 You can look at the exit codes of the virtual HID device and kanata by running 
 sudo launchctl list | grep keymap
