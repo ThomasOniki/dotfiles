@@ -1,31 +1,32 @@
+source scripts/helpers.bash
+
 echo '
 Running kanata install script.
 This script was based off of the guide by thomasthai on github:
 https://github.com/jtroo/kanata/discussions/1537
-If you are interested in what this script does, look at this page or read the source code for this script (scripts/install-kanata-darwin.sh).
+If you are interested in what this script does, look at that page or read the source code for this script (scripts/install-kanata-darwin.sh).
 You may press C-c at any point to exit.
 '
 
-if [[ "$(command -v kanata)" == "" ]]; then
+echo 'Copying daemons to /Library/LaunchDaemons and the config file to /etc, this may request your password...'
+sudo bash -c "source scripts/helpers.bash
+try_ln kanata/kanata.kbd /etc/kanata.kbd
+cp kanata/sh.dotfiles.kanata.plist /Library/LaunchDaemons/sh.dotfiles.kanata.plist
+cp kanata/sh.dotfiles.karabiner-vhid.plist /Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist
+"
 
-	if [[ "$(command -v brew)" == "" ]]; then
-		if [[ "$(command -v cargo)" ]]; then
-			echo "Neither kanata nor brew nor cargo found."
-			exit
-		fi
-		echo "Kanata not found, installing with cargo..."
-		cargo install kanata
-	else
-		echo "Kanata not found, installing with brew..."
-		brew install kanata
-	fi
-
+if ! [[ -z "$KANATA_BINARY" ]] || KANATA_BINARY=$(command -v kanata); then
+	sudo sed -i -e "s#/.*/kanata<#$KANATA_BINARY<#g" kanata/sh.dotfiles.kanata.plist
+	sudo sed -i -e "s#/.*/kanata<#$KANATA_BINARY<#g" /Library/LaunchDaemons/sh.dotfiles.kanata.plist
+else
+	echo "Kanata binary not found. Make sure you have it installed and put it in \$PATH or set \$KANATA_BINARY."
+	exit 1
 fi
 
 if ! [[ -f /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager ]]; then
 	echo "Karabiner vhid not found, cloning the repo temporarily..."
 	git clone https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice/ vhid-repo --depth 1 --filter=blob:none
-	echo "Launching the karabiner virtual HID device installer, this may require your password."
+	echo "Launching the karabiner virtual HID device installer..."
 	open -W vhid-repo/dist/Karabiner-DriverKit-VirtualHIDDevice-6.9.0.pkg
 	echo "Deleting the vhid repo..."
 	command rm -rf vhid-repo
@@ -45,55 +46,16 @@ open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFile
 echo "kanata also needs Accessibility permissions"
 open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
 
-kanata_plist="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\"
- \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-  <dict>
-    <key>Label</key>
-    <string>sh.dotfiles.kanata</string>
-    <key>ProgramArguments</key>
-    <array>
-      <string>$(command -v kanata)</string>
-      <string>--cfg</string>
-      <string>$HOME/.config/kanata/config.kbd</string>
-      <string>--quiet</string>
-    </array>
-		<key>RunAtLoad</key>
-    <true/>
-    <key>KeepAlive</key>
-    <true/>
-
-    <key>StandardOutPath</key>
-    <string>$HOME/Library/Logs/kanata.log</string>
-
-    <key>StandardErrorPath</key>
-    <string>$HOME/Library/Logs/kanata.log</string>
-  </dict>
-</plist>"
-
-karabiner_vhid_plist='<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>sh.dotfiles.karabiner-vhid</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon</string>
-    </array>
-    <key>RunAtLoad</key>
-    <true/>
-    <key>KeepAlive</key>
-    <true/>
-</dict>
-</plist>'
-
-echo 'Creating launch daemons for kanata and the karabiner vhid, this may require your password.
+echo '
+If you got errors saying "_LSOpenURLsWithCompletionHandler() failed with error -600 for the URL...", 
+try running the commands again:
+open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent"
+open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+open -W "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
 '
-sudo tee '/Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist' >/dev/null <<<"$karabiner_vhid_plist"
-sudo tee '/Library/LaunchDaemons/sh.dotfiles.kanata.plist' >/dev/null <<<"$kanata_plist"
 
+echo 'Creating launch daemons for kanata and the karabiner vhid.
+'
 sudo launchctl bootstrap system '/Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist'
 sudo launchctl bootstrap system '/Library/LaunchDaemons/sh.dotfiles.kanata.plist'
 
@@ -107,5 +69,5 @@ You can also try deleting the LaunchDaemons /Library/LaunchDaemons/sh.dotfiles.k
 After a reboot, they should stop.
 You can look at the exit codes of the virtual HID device and kanata by running 
 sudo launchctl list | grep keymap
-Their logs can be seen in ~/Library/logs/kanata_stderr.log and ~/Library/Logs/kanata_stdout.log.
+Their logs can be seen in /Library/Logs/kanata.log.
 '
