@@ -1,2 +1,2 @@
-zsh/.zshrc    ~/.zshrc
 zsh/.zshenv   ~/.zshenv
+zsh/.zshrc    $XDG_CONFIG_HOME/zsh/.zshrc
