@@ -1,3 +1,2 @@
 zsh/.zshrc    ~/.zshrc
 zsh/.zshenv   ~/.zshenv
-zsh/.zprofile ~/.zprofile
