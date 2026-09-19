@@ -14,10 +14,9 @@ restore_backup() {
 
 try_ln() {
 	echo "Creating symlink for $1 at $2..."
-	dir="$(dirname "$1")"
-	mkdir -p "$dir"
+	mkdir -p "$(dirname "$2")"
 	backup "$2"
-	ln -s "$(realpath "$dir")/$(basename "$1")" "$2"
+	ln -s "$(realpath "$1")" "$2"
 }
 
 try_revert_ln() {
@@ -31,7 +30,7 @@ try_revert_ln() {
 		exit 1
 	fi
 
-	echo Removing symlink for $1 at $2...
+	echo "Removing symlink for $1 at $2..."
 	rm -rf "$2"
 
 	restore_backup "$2"
