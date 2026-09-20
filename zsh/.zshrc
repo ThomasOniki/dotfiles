@@ -44,7 +44,10 @@ alias c="clear"
 alias d="trash"
 alias rm="echo use d (an alias for trash) instead of rm."
 
-po() { output=$("$@") && bat <<<"$output"; }
+po() {
+	local output
+	output="$("$@")" && bat <<<"$output"
+}
 alias ll="po lsd -lAh --color=always --icon=always"
 alias l="lsd -A"
 
@@ -88,14 +91,14 @@ h() {
 
 fm() {
 	local IFS=" "
-	entry=$(
+	local entry="$(
 		manpath |
 			tr '\n' ':' |
 			sed 's/::*/:/g' |
 			tr ':' '\0' |
 			xargs -0 fd --no-ignore --hidden --type file --full-path --follow '^.*/man([0-9]|3[a-z]*)/[^/]*\.([0-9]|3[a-z]*)(\.gz)?$' |
 			sed 's/\(.*\)\/\([^/]*\)/\2    \1/' | fzf --query="$*" --preview='entry={}; mandoc "/${entry#*    /}/${entry%%    /*}" | bat --language=man --color=always'
-	)
+	)"
 
 	[[ -n "$entry" ]] && mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
 }
