@@ -32,13 +32,9 @@ source $HOMEBREW_PREFIX/opt/zsh-autocomplete/share/zsh-autocomplete/zsh-autocomp
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
-
 bindkey '^e' edit-command-line
 
 source <(zoxide init zsh)
-source <(fzf --zsh)
-
-export FZF_DEFAULT_COMMAND='rg --hidden --files'
 
 alias c="clear"
 alias d="trash"
@@ -54,6 +50,27 @@ alias l="lsd -A"
 alias nvim="echo Use the alias v instead."
 alias v="command nvim"
 alias vimhost="v --cmd 'let g:live_share_username=\"host\"'"
+
+fzf_zoxide_z() {
+	local output
+	FZF_DEFAULT_COMMAND="fd --type=directory --hidden" output=$(fzf --scheme=path "$@" </dev/tty) &&
+		z "$output" &&
+		zle accept-line
+}
+zle -N fzf_zoxide_z
+bindkey '^z' fzf_zoxide_z
+
+fzf_history() {
+	local output
+	output=$(history | fzf --scheme=history "$@") &&
+		BUFFER="$(sed 's/[ ]*[0-9]*[ ]*//' <<<"$output")" &&
+		CURSOR="${#BUFFER}" &&
+		zle reset-prompt
+}
+zle -N fzf_history
+bindkey '^r' fzf_history
+
+export FZF_DEFAULT_COMMAND='fd --type=file --hidden'
 
 alias bwul='export BW_SESSION="$(bw unlock --raw)"'
 
