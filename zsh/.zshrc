@@ -72,8 +72,6 @@ bindkey '^r' fzf_history
 
 export FZF_DEFAULT_COMMAND='fd --type=file --hidden'
 
-alias bwul='export BW_SESSION="$(bw unlock --raw)"'
-
 alias q="builtin exit"
 alias exit="echo Use the alias q instead"
 
