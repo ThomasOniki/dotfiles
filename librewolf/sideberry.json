@@ -1,15 +1,16 @@
 {
 	"ver": "5.6.1",
 	"keybindings": {
-		"_execute_sidebar_action": "MacCtrl+B",
-		"activate": "Alt+Space",
+		"_execute_sidebar_action": "MacCtrl+Shift+B",
+		"activate": "MacCtrl+Shift+T",
 		"reset_selection": "Alt+R",
 		"next_panel": "Alt+Period",
 		"prev_panel": "Alt+Comma",
 		"new_tab_on_panel": "MacCtrl+Space",
 		"new_tab_in_group": "MacCtrl+Shift+Space",
-		"up": "Alt+Up",
-		"down": "Alt+Down",
+		"rm_tab_on_panel": "MacCtrl+Shift+D",
+		"up": "MacCtrl+Shift+F",
+		"down": "MacCtrl+Shift+S",
 		"up_shift": "Alt+Shift+Up",
 		"down_shift": "Alt+Shift+Down"
 	}
