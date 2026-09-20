@@ -15,7 +15,7 @@ cp kanata/sh.dotfiles.kanata.plist /Library/LaunchDaemons/sh.dotfiles.kanata.pli
 cp kanata/sh.dotfiles.karabiner-vhid.plist /Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist
 "
 
-if ! [[ -z "$KANATA_BINARY" ]] || KANATA_BINARY=$(command -v kanata); then
+if [[ -n "$KANATA_BINARY" ]] || KANATA_BINARY=$(command -v kanata); then
 	sudo sed -i -e "s#/.*/kanata<#$KANATA_BINARY<#g" kanata/sh.dotfiles.kanata.plist
 	sudo sed -i -e "s#/.*/kanata<#$KANATA_BINARY<#g" /Library/LaunchDaemons/sh.dotfiles.kanata.plist
 else

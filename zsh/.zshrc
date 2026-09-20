@@ -72,7 +72,7 @@ samplegraph() {
 	librewolf "$HOME/.cache/flamegraph.svg"
 }
 
-[[ -z "$NVIM" ]] || function man() {
+[[ -n "$NVIM" ]] && function man() {
 	# used for completions
 	if [[ "$*" = --- ]]; then
 		command man ---
@@ -97,7 +97,7 @@ fm() {
 			sed 's/\(.*\)\/\([^/]*\)/\2    \1/' | fzf --query="$*" --preview='entry={}; mandoc "/${entry#*    /}/${entry%%    /*}" | bat --language=man --color=always'
 	)
 
-	[[ -z "$entry" ]] || mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
+	[[ -n "$entry" ]] && mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
 }
 
 use_brew_llvm_toolchain() {
