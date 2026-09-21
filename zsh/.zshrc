@@ -70,6 +70,20 @@ fzf_history() {
 zle -N fzf_history
 bindkey '^r' fzf_history
 
+fzf_tmux_session() {
+	local output
+	output=$(tmux list-sessions -F '#{session_name}' | fzf) || return
+	tmux switch-client -t "$output" || tmux attach-session -t "$output"
+}
+zle -N fzf_tmux_session
+bindkey '^f' fzf_tmux_session
+fzf_tmux_window() {
+	local output
+	output=$(tmux list-windows -F '#{window_name}' | fzf) || return
+}
+zle -N fzf_tmux_window
+bindkey '^w' fzf_tmux_window
+
 export FZF_DEFAULT_COMMAND='fd --type=file --hidden'
 
 alias q="builtin exit"
