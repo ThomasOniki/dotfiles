@@ -51,58 +51,8 @@ alias nvim="echo Use the alias v instead."
 alias v="command nvim"
 alias vimhost="v --cmd 'let g:live_share_username=\"host\"'"
 
-fzf_zoxide_z() {
-	local output
-	FZF_DEFAULT_COMMAND="fd --type=directory --hidden" output=$(fzf --scheme=path "$@" </dev/tty) &&
-		z "$output" &&
-		zle accept-line
-}
-zle -N fzf_zoxide_z
-bindkey '^z' fzf_zoxide_z
-
-fzf_history() {
-	local output
-	output=$(history | fzf --scheme=history "$@") &&
-		BUFFER="$(sed 's/[ ]*[0-9]*[ ]*//' <<<"$output")" &&
-		CURSOR="${#BUFFER}" &&
-		zle reset-prompt
-}
-zle -N fzf_history
-bindkey '^r' fzf_history
-
-fzf_tmux_session() {
-	local output
-	output=$(tmux list-sessions -F '#{session_name}' | fzf) || return
-	tmux switch-client -t "$output" || tmux attach-session -t "$output"
-}
-zle -N fzf_tmux_session
-bindkey '^f' fzf_tmux_session
-fzf_tmux_window() {
-	local output
-	output=$(tmux list-windows -F '#{window_name}' | fzf) || return
-}
-zle -N fzf_tmux_window
-bindkey '^w' fzf_tmux_window
-
-export FZF_DEFAULT_COMMAND='fd --type=file --hidden'
-
 alias q="builtin exit"
 alias exit="echo Use the alias q instead"
-
-alias lcc="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
-alias lc++="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
-alias dis='po $OBJDUMP --disassemble --disassembler-color=on'
-alias ctestat='ctest --output-on-failure --timeout=20s --test-dir'
-
-samplegraph() {
-	exe="$1"
-	shift
-	sample "${exe##*/}" -wait -f "$HOME/.cache/sample.out" -fullPaths 2>/dev/null &
-	"$exe" "$@"
-	wait
-	stackcollapse-sample.awk <"$HOME/.cache/sample.out" | flamegraph.pl >"$HOME/.cache/flamegraph.svg"
-	librewolf "$HOME/.cache/flamegraph.svg"
-}
 
 [[ -n "$NVIM" ]] && function man() {
 	# used for completions
@@ -118,19 +68,60 @@ h() {
 	$@ --help | v +Man!
 }
 
-fm() {
+export FZF_DEFAULT_COMMAND='fd --type=file --hidden'
+
+fzf_man() {
 	local IFS=" "
-	local entry="$(
+	local entry=$(
 		manpath |
 			tr '\n' ':' |
 			sed 's/::*/:/g' |
 			tr ':' '\0' |
 			xargs -0 fd --no-ignore --hidden --type file --full-path --follow '^.*/man([0-9]|3[a-z]*)/[^/]*\.([0-9]|3[a-z]*)(\.gz)?$' |
 			sed 's/\(.*\)\/\([^/]*\)/\2    \1/' | fzf --query="$*" --preview='entry={}; mandoc "/${entry#*    /}/${entry%%    /*}" | bat --language=man --color=always'
-	)"
+	)
 
 	[[ -n "$entry" ]] && mandoc "/${entry#*    /}/${entry%%    /*}" | v +Man!
 }
+fzf_zoxide_z() {
+	local output
+	FZF_DEFAULT_COMMAND="fd --type=directory --hidden" output=$(fzf --scheme=path "$@" </dev/tty) &&
+		z "$output" &&
+		zle accept-line
+}
+fzf_history() {
+	local output
+	output=$(history | fzf --scheme=history "$@") || return
+	BUFFER=$(sed 's/[ ]*[0-9]*[ ]*//' <<<"$output")
+	CURSOR=${#BUFFER}
+	zle reset-prompt
+}
+fzf_tmux_session() {
+	local output
+	output=$(tmux list-sessions -F '#{session_name}' | fzf) || return
+	tmux switch-client -t "$output" || tmux attach-session -t "$output"
+}
+fzf_tmux_window() {
+	local output
+	output=$(tmux list-windows -F '#{window_name}' | fzf) || return
+}
+
+zle -N fzf_man
+zle -N fzf_zoxide_z
+zle -N fzf_history
+zle -N fzf_tmux_session
+zle -N fzf_tmux_window
+
+bindkey '^h' fzf_man
+bindkey '^z' fzf_zoxide_z
+bindkey '^r' fzf_history
+bindkey '^f' fzf_tmux_session
+bindkey '^w' fzf_tmux_window
+
+alias lcc="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
+alias lc++="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
+alias dis='po $OBJDUMP --disassemble --disassembler-color=on'
+alias ctestat='ctest --output-on-failure --timeout=20s --test-dir'
 
 use_brew_llvm_toolchain() {
 	export AS="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-as" CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang" CXX="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
@@ -140,7 +131,6 @@ use_brew_llvm_toolchain() {
 	export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-nm"
 	export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
 }
-
 use_brew_gcc_toolchain() {
 	local bin="$(fd --type=directory --exact-depth=2 --follow --absolute-path --full-path "^$HOMEBREW_PREFIX/opt/gcc@[0-9]*/bin$" "$HOMEBREW_PREFIX/opt" |
 		sort --version-sort | tail -1)"
@@ -154,7 +144,6 @@ use_brew_gcc_toolchain() {
 	export OBJDUMP="$HOMEBREW_PREFIX/opt/binutils/bin/objdump" NM="$bin/gcc-nm-$ver"
 	export CLANGD="/usr/bin/clangd"
 }
-
 use_system_toolchain() {
 	export AS="/usr/bin/as" CC="/usr/bin/clang" CXX="/usr/bin/clang++"
 	export AR="/usr/bin/ar" RANLIB="/usr/bin/ranlib"
@@ -162,4 +151,13 @@ use_system_toolchain() {
 	export STRIP="/usr/bin/strip"
 	export OBJDUMP="/usr/bin/objdump" NM="/usr/bin/nm"
 	export CLANGD="/usr/bin/clangd"
+}
+samplegraph() {
+	exe="$1"
+	shift
+	sample "${exe##*/}" -wait -f "$HOME/.cache/sample.out" -fullPaths 2>/dev/null &
+	"$exe" "$@"
+	wait
+	stackcollapse-sample.awk <"$HOME/.cache/sample.out" | flamegraph.pl >"$HOME/.cache/flamegraph.svg"
+	librewolf "$HOME/.cache/flamegraph.svg"
 }
