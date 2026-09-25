@@ -60,8 +60,19 @@ export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX
 export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/
 export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
 export CFLAGS="-pipe" CXXFLAGS="-pipe" OBJCFLAGS="-pipe" OBJCXXFLAGS="-pipe"
-export CMAKE_CXX_COMPILER_LAUNCHER="$HOMEBREW_PREFIX/opt/ccache/bin/ccache"
-export CMAKE_GENERATOR=Ninja
+
 export CMAKE_EXPORT_COMPILE_COMMANDS=ON
+export CMAKE_CXX_COMPILER_LAUNCHER="$HOMEBREW_PREFIX/opt/ccache/bin/ccache"
+export CMAKE_GENERATOR="Ninja Multi-Config"
+
+export CMAKE_CONFIGURATION_TYPES="ASan;Native;Debug;Release;RelWithDebInfo"
+export CMAKE_C_FLAGS_ASAN="-g -O0 -fsanitize=address,undefined"
+export CMAKE_CXX_FLAGS_ASAN="-g -O0 -fsanitize=address,undefined"
+export CMAKE_OBJC_FLAGS_ASAN="-g -O0 -fsanitize=address,undefined"
+export CMAKE_OBJCXX_FLAGS_ASAN="-g -O0 -fsanitize=address,undefined"
+export CMAKE_C_FLAGS_NATIVE="-O3 -DNDEBUG -march=native"
+export CMAKE_CXX_FLAGS_NATIVE="-O3 -DNDEBUG -march=native"
+export CMAKE_OBJC_FLAGS_NATIVE="-O3 -DNDEBUG -march=native"
+export CMAKE_OBJCXX_FLAGS_NATIVE="-O3 -DNDEBUG -march=native"
 
 source $HOME/VulkanSDK/1.4.341.1/setup-env.sh >/dev/null
