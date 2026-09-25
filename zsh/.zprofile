@@ -23,22 +23,6 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
-# This is to make emscan-deps not report an error there is no bundled clang-scan-deps in the
-# default emscripten llvm. To get the emscripten-llvm-bin directory, run:
-#
-# brew install llvm lld
-# [[ -z XDG_DATA_HOME ]] && XDG_DATA_HOME="$HOME/.local/share"
-# export EM_LLVM_ROOT="$XDG_DATA_HOME/emscripten-llvm-bin"
-# mkdir -p "$EM_LLVM_ROOT"
-# ln -s "$HOMEBREW_PREFIX/opt/llvm/bin/clang" "$EM_LLVM_ROOT"
-# ln -s "$HOMEBREW_PREFIX/opt/llvm/bin/clang++" "$EM_LLVM_ROOT"
-# ln -s "$HOMEBREW_PREFIX/opt/llvm/bin/clang-scan-deps" "$EM_LLVM_ROOT"
-# ln -s "$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ar" "$EM_LLVM_ROOT"
-# ln -s "$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ranlib" "$EM_LLVM_ROOT"
-# ln -s "$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objcopy" "$EM_LLVM_ROOT"
-# ln -s "$HOMEBREW_PREFIX/opt/lld/bin/lld" "$EM_LLVM_ROOT/wasm-ld"
-export EM_LLVM_ROOT="$XDG_DATA_HOME/emscripten-llvm-bin/"
-
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
