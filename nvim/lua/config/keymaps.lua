@@ -12,7 +12,6 @@ mappings.default = {
   { "<leader>X", "<cmd>bw!<CR>", desc = "Force quit buffer without saving" },
   { "<leader>q", "<cmd>wqa<CR>", desc = "Save and close all buffers" },
   { "<leader>Q", "<cmd>qa!<CR>", desc = "Force quit all buffers without saving" },
-  { "<leader>t", "<cmd>term<CR>i", desc = "Open terminal buffer" },
   { "<D-v>", '"*p', desc = "Paste from clipboard" },
   {
     "<esc>",
