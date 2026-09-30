@@ -1,9 +1,30 @@
 ---@type LazyPluginSpec[]
 local spec = {}
 
-table.insert(spec, { "akinsho/bufferline.nvim", opts = {} })
-table.insert(spec, { "nvim-mini/mini.icons", opts = {} })
 table.insert(spec, { "windwp/nvim-autopairs", opts = {} })
+
+table.insert(spec, {
+  "nvim-mini/mini.icons",
+  opts = {},
+  config = function(_, opts)
+    require("mini.icons").setup(opts)
+    MiniIcons.mock_nvim_web_devicons()
+  end,
+})
+
+table.insert(spec, {
+  "akinsho/bufferline.nvim",
+  opts = {},
+  dependencies = {
+    "nvim-mini/mini.icons",
+  },
+})
+
+table.insert(spec, {
+  "nvim-lualine/lualine.nvim",
+  dependencies = { "nvim-mini/mini.icons" },
+  opts = { icons_enabled = true },
+})
 
 table.insert(spec, {
   "numToStr/Comment.nvim",
@@ -18,12 +39,6 @@ table.insert(spec, {
   dependencies = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig", "kevinhwang91/promise-async" },
   opts = {},
   keys = { "za", "zR", "zM" },
-})
-
-table.insert(spec, {
-  "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {},
 })
 
 table.insert(spec, {
