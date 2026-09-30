@@ -33,7 +33,27 @@ table.insert(spec, {
   end,
 })
 
-table.insert(spec, { "lewis6991/gitsigns.nvim", opts = {} })
+table.insert(spec, {
+  "lewis6991/gitsigns.nvim",
+  opts = {},
+  keys = {
+    {
+      "<leader>gs",
+      function()
+        require("gitsigns").stage_hunk()
+      end,
+      desc = "Stage git hunk",
+    },
+    {
+      "<leader>gu",
+      function()
+        require("gitsigns").stage_hunk()
+      end,
+      desc = "Unstage git hunk",
+    },
+  },
+  event = "VeryLazy",
+})
 
 table.insert(spec, {
   "3rd/image.nvim",
