@@ -5,7 +5,11 @@ table.insert(spec, { "windwp/nvim-autopairs", opts = {} })
 
 table.insert(spec, {
   "nvim-mini/mini.icons",
-  opts = {},
+  opts = {
+    extension = {
+      mcfunction = { glyph = "󰍳" },
+    },
+  },
   config = function(_, opts)
     require("mini.icons").setup(opts)
     MiniIcons.mock_nvim_web_devicons()
