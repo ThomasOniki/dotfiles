@@ -6,8 +6,8 @@ table.insert(spec, {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
-    "nvim-tree/nvim-web-devicons",
-    "antosha417/nvim-lsp-file-operations",
+    "nvim-mini/mini.icons",
+    "Crysthamus/nvim-file-operations",
   },
   opts = {
     enable_cursor_hijack = true,
