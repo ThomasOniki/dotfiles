@@ -85,11 +85,12 @@ table.insert(spec, {
   "jghauser/follow-md-links.nvim",
 })
 table.insert(spec, {
-  "OXY2DEV/markview.nvim",
-  dependencies = { "jghauser/follow-md-links.nvim", "nvim-mini/mini.icons" },
-  opts = {
-    preview = { icon_provider = "mini" },
-  },
+  "tigion/nvim-asciidoc-preview",
+  opts = {},
+})
+table.insert(spec, {
+  "brianhuster/live-preview.nvim",
+  dependencies = { "ibhagwan/fzf-lua" },
 })
 
 table.insert(spec, {
