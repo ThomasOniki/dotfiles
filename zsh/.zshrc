@@ -126,8 +126,12 @@ bindkey '^f' fzf_tmux_session
 bindkey '^w' fzf_tmux_window
 
 alias lcc="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
-alias lc++="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
-alias dis='po $OBJDUMP --disassemble --disassembler-color=on'
+alias lcxx="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
+alias llfmt="$HOMEBREW_PREFIX/opt/llvm/bin/clang-format"
+alias lltidy="$HOMEBREW_PREFIX/opt/llvm/bin/clang-tidy"
+alias llrtidy='$HOMEBREW_PREFIX/opt/llvm/bin/run-clang-tidy -clang-tidy-binary="$HOMEBREW_PREFIX/opt/llvm/bin/clang-tidy" -quiet'
+alias llcxxfilt="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-cxxfilt"
+alias dis='po "$OBJDUMP" --disassemble --disassembler-color=on'
 alias ctestat='ctest --output-on-failure --timeout=20s --test-dir'
 
 mc() {
