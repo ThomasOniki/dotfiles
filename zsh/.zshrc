@@ -99,9 +99,14 @@ fzf_history() {
 	zle reset-prompt
 }
 fzf_tmux_session() {
+	if [[ -z "$TMUX" ]]; then
+		printf "\nfzf_tmux_session only works when you are already attached to a session"
+		zle accept-line
+		return 1
+	fi
 	local output
 	output=$(tmux list-sessions -F '#{session_name}' | fzf) || return
-	tmux switch-client -t "$output" || tmux attach-session -t "$output"
+	tmux switch-client -t "$output" <"$TTY"
 }
 fzf_tmux_window() {
 	local output
