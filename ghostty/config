@@ -3,3 +3,4 @@ font-size = 18
 window-width = 200
 window-height = 150
 macos-titlebar-style = hidden
+shell-integration-features = ssh-terminfo,sudo
