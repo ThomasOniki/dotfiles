@@ -191,11 +191,12 @@ use_brew_llvm_toolchain() {
 	export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
 }
 use_brew_gcc_toolchain() {
-	local bin="$(fd --type=directory --exact-depth=2 --follow --absolute-path --full-path "^$HOMEBREW_PREFIX/opt/gcc@[0-9]*/bin$" "$HOMEBREW_PREFIX/opt" |
+	local root="$(fd --type=directory --exact-depth=1 . "$HOMEBREW_PREFIX/Cellar/gcc" |
 		sort --version-sort | tail -1)"
-	bin="${bin%/}"
-	local ver="${bin##*gcc@}"
-	ver="${ver%/bin}"
+	root="${root%/}"
+	local bin="${root}/bin"
+	local ver="${root##*/}"
+	ver="${ver%%.*}"
 	export AS="/usr/bin/as" CC="$bin/gcc-$ver" CXX="$bin/g++-$ver"
 	export AR="$bin/gcc-ar-$ver" RANLIB="$bin/gcc-ranlib-$ver"
 	export LD="gold" CC_LD="gold" CXX_LD="gold"
