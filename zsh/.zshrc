@@ -123,6 +123,65 @@ alias lc++="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
 alias dis='po $OBJDUMP --disassemble --disassembler-color=on'
 alias ctestat='ctest --output-on-failure --timeout=20s --test-dir'
 
+mc() {
+	$CMAKE_LAUNCHER cmake \
+		-DCMAKE_INSTALL_PREFIX="$PWD/prefix" \
+		-G "Ninja Multi-Config" \
+		-DCMAKE_CONFIGURATION_TYPES="ASan;Native;Debug;Release;RelWithDebInfo" \
+		-DCMAKE_C_FLAGS_ASAN="-g -O0 -fsanitize=address,undefined" \
+		-DCMAKE_CXX_FLAGS_ASAN="-g -O0 -fsanitize=address,undefined" \
+		-DCMAKE_OBJC_FLAGS_ASAN="-g -O0 -fsanitize=address,undefined" \
+		-DCMAKE_OBJCXX_FLAGS_ASAN="-g -O0 -fsanitize=address,undefined" \
+		-DCMAKE_C_FLAGS_NATIVE="-O3 -march=native" \
+		-DCMAKE_CXX_FLAGS_NATIVE="-O3 -march=native" \
+		-DCMAKE_OBJC_FLAGS_NATIVE="-O3 -march=native" \
+		-DCMAKE_OBJCXX_FLAGS_NATIVE="-O3 -march=native" \
+		-B "$@"
+}
+alias emmc="CMAKE_LAUNCHER=emcmake mc"
+
+mb() {
+	dir="$1"
+	shift
+	cmake --build "$dir" --config "$@"
+}
+mba() {
+	dir="$1"
+	shift
+	cmake --build "$dir" --config ASan "$@"
+}
+mbn() {
+	dir="$1"
+	shift
+	cmake --build "$dir" --config Native "$@"
+}
+mbd() {
+	dir="$1"
+	shift
+	cmake --build "$dir" --config Debug "$@"
+}
+
+ts() {
+	dir="$1"
+	shift
+	ctest --test-dir="$dir" -C "$@"
+}
+tsa() {
+	dir="$1"
+	shift
+	ctest --test-dir="$dir" -C ASan "$@"
+}
+tsn() {
+	dir="$1"
+	shift
+	ctest --test-dir="$dir" -C Native "$@"
+}
+tsd() {
+	dir="$1"
+	shift
+	ctest --test-dir="$dir" -C Debug "$@"
+}
+
 use_brew_llvm_toolchain() {
 	export AS="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-as" CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang" CXX="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
 	export AR="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ar" RANLIB="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ranlib"
