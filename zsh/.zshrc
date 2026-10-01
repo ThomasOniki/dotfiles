@@ -68,6 +68,8 @@ h() {
 	$@ --help | v +Man!
 }
 
+alias nts='tmux new -s "${PWD##*/}"'
+
 export FZF_DEFAULT_COMMAND='fd --type=file --hidden'
 
 fzf_man() {
