@@ -35,7 +35,7 @@ This repositorie contains many modules (folders) that can be installed by runnin
 scripts/install <module>
 ----
 
-For further instructions, see `docs/<module>.adoc`.
+For further instructions, see `<module>/README.adoc`.
 
 == Uninstall
 [source,sh]
