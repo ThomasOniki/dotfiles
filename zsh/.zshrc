@@ -180,7 +180,11 @@ cmk() {
 	local flags="$3"
 	local link_flags="$4"
 
-	shift "$((# <= 4 ? # : 4))"
+	if [[ $# -gt 4 ]]; then
+		shift 4
+	else
+		shift $#
+	fi
 
 	cmake \
 		-B "builds/$subdir" \
@@ -207,10 +211,21 @@ alias cmks='cmk ${CC##*/}/stripped Release         ""                           
 alias cmkn='cmk ${CC##*/}/native   Release         "-march=native"                "-s"'
 
 cmkmgw() {
+	local subdir="$1"
+	local build_type="$2"
+	local flags="$3"
+	local link_flags="$4"
+
+	if [[ $# -gt 4 ]]; then
+		shift 4
+	else
+		shift $#
+	fi
+
 	cmk \
-		"$1" "$2" \
-		"$3" \
-		"$4 -static-libgcc -static-libstdc++ -Wl,-Bstatic -lpthread -Wl,-Bdynamic" \
+		"$subdir" "$build_type" \
+		"$flags" \
+		"$link_flags -static-libgcc -static-libstdc++ -Wl,-Bstatic -lpthread -Wl,-Bdynamic" \
 		-DCMAKE_SYSTEM_NAME=Windows \
 		-DCMAKE_SYSTEM_PROCESSOR=x86_64 \
 		-DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc \
@@ -221,7 +236,8 @@ cmkmgw() {
 		-DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
 		-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
 		-DCMAKE_GET_RUNTIME_DEPENDENCIES_PLATFORM="windows+pe" \
-		-DMINGW=ON
+		-DMINGW=ON \
+		"$@"
 }
 
 alias cmkmgwd='cmkmgw mingw/debug    Debug           ""                              ""'
