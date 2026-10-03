@@ -17,13 +17,7 @@
 Return lazy.nvim plugin specs in lthe lua/plugins folder. You can use the files that I already have there or https://lazy.folke.io[this website] as a referece. LazyVim and lazy.nvim are not the same, lazy.nvim is a plugin manager and LazyVim is a configuration template that uses lazy.nvim. You can find documentation for LazyVim https://www.lazyvim.org[here].
 
 === Colorschemes
-Add functions that enable your colorscheme to the table returned by xref:nvim/.config/nvim/lua/config/colorschemes.lua[config/colorschemes.lua], and add their corresponding plugins to xref:../nvim/.config/nvim/lua/plugins/colorschemes.lua[plugins/colorschemes.lua]. Again, see the existing configs if you want examples.
-The colorscheme that will actually be enabled is chosen by this line in xref:../nvim/.config/nvim/init.lua[init.lua].
-[source,lua]
-----
-require("config.colorschemes").edge()
-----
-Change this to your prefered colorscheme.
+See link:lua/config/colorschemes.lua[colorschemes.lua].
 
 === Keymaps
 There is a table in xref:../nvim/.config/nvim/lua/config/keymaps.lua[keymaps.lua] called `mappings` that you can add to. It is a dictionary with each value being a list of mappings. Each list can be indenpendly mapped and unmapped using the functions `map` and `unmap`. If you want to use the functions outside of keymaps.lua, use `require("config.keymaps").{map, unmap}("<mapping_name>")`. Each mapping follows the LazyKeys syntax: [1] is lhs, [2] is rhs, mode, if present specifies the modes (otherwise it defaults to "n") and all other entries are put into opts. For example,
