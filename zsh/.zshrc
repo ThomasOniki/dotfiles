@@ -200,11 +200,11 @@ cmk() {
 	cmake --build "builds/$subdir"
 }
 
-alias cmkd='cmk ${CC##*/}/debug    Debug'
-alias cmka='cmk ${CC##*/}/asan     Debug           "-fsanitize=address,undefined"'
-alias cmkr='cmk ${CC##*/}/release  RelWithDebInfo'
-alias cmks='cmk ${CC##*/}/stripped Release         "" "-s"'
-alias cmkn='cmk ${CC##*/}/native   Release         "-march=native" "-s"'
+alias cmkd='cmk ${CC##*/}/debug    Debug           ""                             ""'
+alias cmka='cmk ${CC##*/}/asan     Debug           "-fsanitize=address,undefined" ""'
+alias cmkr='cmk ${CC##*/}/release  RelWithDebInfo  ""                             ""'
+alias cmks='cmk ${CC##*/}/stripped Release         ""                             "-s"'
+alias cmkn='cmk ${CC##*/}/native   Release         "-march=native"                "-s"'
 
 cmkmgw() {
 	cmk \
@@ -224,8 +224,8 @@ cmkmgw() {
 		-DMINGW=ON
 }
 
-alias cmkmgwd='cmkmgw mingw/debug    Debug'
-alias cmkmgwa='cmkmgw mingw/asan     Debug          "-fsanitize=address,undefined"'
-alias cmkmgwr='cmkmgw mingw/release  RelWithDebInfo'
-alias cmkmgws='cmkmgw mingw/stripped Release         "" "-s"'
-alias cmkmgwn='cmkmgw mingw/native   Release         "-march=native" "-s"'
+alias cmkmgwd='cmkmgw mingw/debug    Debug           ""                              ""'
+alias cmkmgwa='cmkmgw mingw/asan     Debug           "-fsanitize=address,undefined"  ""'
+alias cmkmgwr='cmkmgw mingw/release  RelWithDebInfo  ""                              ""'
+alias cmkmgws='cmkmgw mingw/stripped Release         ""                              "-s"'
+alias cmkmgwn='cmkmgw mingw/native   Release         "-march=native"                 "-s"'
