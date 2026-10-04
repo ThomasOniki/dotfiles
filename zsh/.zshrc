@@ -71,6 +71,7 @@ h() {
 alias nts='tmux new -s "${PWD##*/}"'
 
 export FZF_DEFAULT_COMMAND='fd --type=file --hidden'
+export FZF_DEFAULT_OPTS='--height=80% --layout=reverse --tmux="center,80%,60%"'
 
 fzf_man() {
 	local IFS=" "
