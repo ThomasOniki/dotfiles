@@ -4,7 +4,12 @@ local spec = {}
 table.insert(spec, {
   "ibhagwan/fzf-lua",
   dependencies = { "nvim-mini/mini.icons" },
-  opts = { grep = { rg_opts = "--color=always --line-number --column --hidden" } },
+  ---@module "fzf-lua"
+  ---@type fzf-lua.Config
+  opts = {
+    "fzf-tmux",
+    grep = { rg_opts = "--color=always --line-number --column --hidden" },
+  },
   keys = {
     {
       "<leader>ff",
@@ -41,13 +46,17 @@ table.insert(spec, {
       end,
       desc = "Grep for current word",
     },
-
     {
-      "<leader>fs",
+      "<C-f>",
       function()
-        require("auto-session").search()
+        require("fzf-lua").fzf_exec("tmux list-sessions -F '#{session_name}'", {
+          actions = {
+            ["default"] = function(selected)
+              os.execute("tmux switch-client -t " .. selected[1])
+            end,
+          },
+        })
       end,
-      desc = "Find session",
     },
   },
 
