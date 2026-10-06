@@ -226,7 +226,7 @@ cmkmgw() {
 	cmk \
 		"$subdir" "$build_type" \
 		"$flags" \
-		"$link_flags -static-libgcc -static-libstdc++ -Wl,-Bstatic -lpthread -Wl,-Bdynamic" \
+		"$link_flags" \
 		-DCMAKE_SYSTEM_NAME=Windows \
 		-DCMAKE_SYSTEM_PROCESSOR=x86_64 \
 		-DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc \
