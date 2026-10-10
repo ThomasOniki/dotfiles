@@ -38,7 +38,6 @@ source <(zoxide init zsh)
 
 alias c="clear"
 alias d="trash"
-alias rm="echo use d (an alias for trash) instead of rm."
 
 po() {
 	local output
@@ -47,12 +46,10 @@ po() {
 alias ll="po lsd -lAh --color=always --icon=always"
 alias l="lsd -A"
 
-alias nvim="echo Use the alias v instead."
 alias v="command nvim"
 alias vimhost="v --cmd 'let g:live_share_username=\"host\"'"
 
 alias q="builtin exit"
-alias exit="echo Use the alias q instead"
 
 [[ -n "$NVIM" ]] && function man() {
 	# used for completions
