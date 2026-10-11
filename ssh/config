@@ -1,0 +1,1 @@
+ProxyCommand "$HOME/.ssh/keepassxc-prompt.sh" %h %p
