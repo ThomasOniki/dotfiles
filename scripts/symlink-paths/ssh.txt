@@ -1,0 +1,2 @@
+ssh/config              $HOME/.ssh/config
+ssh/keepassxc-prompt.sh $HOME/.ssh/keepassxc-prompt.sh
