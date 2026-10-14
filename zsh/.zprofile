@@ -45,5 +45,6 @@ export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platf
 export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
 export CFLAGS="-pipe" CXXFLAGS="-pipe" OBJCFLAGS="-pipe" OBJCXXFLAGS="-pipe"
 export WINEPATH="$HOMEBREW_PREFIX/opt/mingw-w64/toolchain-x86_64/x86_64-w64-mingw32/bin;$HOMEBREW_PREFIX/opt/mingw-w64/toolchain-x86_64/x86_64-w64-mingw32/lib"
+export WINEDEBUG="-all"
 
 source $HOME/VulkanSDK/1.4.341.1/setup-env.sh >/dev/null
