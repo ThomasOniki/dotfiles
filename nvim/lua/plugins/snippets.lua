@@ -12,6 +12,15 @@ table.insert(spec, {
     require("luasnip").setup(opts)
     require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/lua/snippets" })
   end,
+  keys = {
+    {
+      "<S-CR>",
+      function()
+        require("luasnip").jump(1)
+      end,
+      mode = { "i", "x" },
+    },
+  },
 })
 
 return spec
