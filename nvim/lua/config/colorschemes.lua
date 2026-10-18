@@ -1,7 +1,7 @@
 local schemes = {
   ayu = "Shatur/neovim-ayu",
   edge = "sainnhe/edge",
-  tokyonight = "folke/tokyonight.nvim",
+  ["tokyonight-night"] = "folke/tokyonight.nvim",
   dracula = "mofiqul/dracula.nvim",
   kanagawa = "rebelot/kanagawa.nvim",
   onedark = "olimorris/onedarkpro.nvim",
