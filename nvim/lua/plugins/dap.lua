@@ -18,6 +18,13 @@ table.insert(spec, {
       desc = "Run/Continue",
     },
     {
+      "<leader>dp",
+      function()
+        require("dap").pause()
+      end,
+      desc = "Pause",
+    },
+    {
       "<leader>dt",
       function()
         require("dap").terminate()
