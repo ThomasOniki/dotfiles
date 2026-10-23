@@ -8,6 +8,7 @@ table.insert(spec, {
     "ibhagwan/fzf-lua",
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
+    "nvim-treesitter/nvim-treesitter",
   },
   ---@type lc.UserConfig
   opts = {
