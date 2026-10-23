@@ -14,6 +14,7 @@ local function configure_lsps()
         },
       },
     },
+    root_markers = { ".git", "stylua.toml", ".luarc.json" },
   })
 
   vim.lsp.config("clangd", {
