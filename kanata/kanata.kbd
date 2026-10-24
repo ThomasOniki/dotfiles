@@ -57,45 +57,45 @@
 )
 
 (deflayer base
-  XX           XX       XX       XX       XX       XX        XX        XX       XX       XX       XX       XX       XX
-  XX       XX       XX       XX       XX       XX       XX        XX        XX       XX       XX       XX       XX       XX
-  tab          q        @w-opt   @f-hyp   p        b         XX        j        l        @u-hyp   @y-opt   ;        tab  XX
-  bspc         a        @r-ctl   @s-sft   @t-cmd   g         XX        m        @n-cmd   @e-sft   @i-ctl   o        @ret-esc
-  XX       `        x        c        d        v        z        caps      k        h        ,        .        XX        /
-  XX       XX       XX       @sym2                      @spc-nav                    @sym1    rsft     XX       XX        XX
+  XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  tab      q        @w-opt   @f-hyp   p        b        XX       j        l        @u-hyp   @y-opt   ;        tab      XX
+  bspc         a        @r-ctl   @s-sft   @t-cmd   g        XX       m        @n-cmd   @e-sft   @i-ctl   o        @ret-esc XX
+  `            x        c        d        v        z        caps     k        h        ,        .        /        XX
+  XX       XX       XX       @sym2    lsft     XX       XX       XX       spc      @sym1    XX       XX       XX       XX
+  XX       XX       XX       XX                         @nav                       XX       XX       XX       XX       XX
 )
 
 (deflayer sym1
-  XX           XX       XX       XX       XX       XX        XX        XX       XX       XX       XX       XX       XX
-  XX       XX       XX       XX       XX       XX       XX        XX        XX       XX       XX       XX       XX      XX
-  XX           XX       S-[      S-]      S-4      XX        XX       XX        S-2      S-7      S--      XX       `   XX
-  esc          '        S-'      S-9      S-0      =         XX        -        S-=      S-8      S-1      S-/      S--
-  XX       XX       XX       XX       XX       XX       XX        XX       XX       XX       XX       XX       XX       XX
-  XX       XX       XX       XX                         XX                          XX       XX       XX       XX       XX
+  XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX       XX       S-[      S-]      S-4      XX       XX       XX       S-2      S-7      S--      XX       `        XX
+  esc          '        S-'      S-9      S-0      =        XX       -        S-=      S-8      S-1      S-/      S--      XX
+  XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
 )
 
 (deflayer sym2
-  XX           XX       XX       XX       XX       XX        XX       XX       XX       XX       XX       XX       XX
-  XX       XX       XX       XX       XX       XX       XX        XX       XX       XX       XX       XX       XX       XX
-  XX           XX       S-5      S-3      S-6      XX        XX       XX       5        3        2        9        ;    XX
-  XX           S-,      S-.      [        ]        f         XX       6        1        0        4        8        7
-  XX       XX       XX       XX       XX       /        S-`       XX       \        n        XX       XX       XX       XX
-  XX       XX       XX       XX                         XX                          XX       XX       XX       XX       XX
+  XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX       XX       S-5      S-3      S-6      XX       XX       XX       5        3        2        9        ;        XX
+  XX           S-,      S-.      [        ]        f        XX       6        1        0        4        8        7        XX
+  XX           XX       XX       XX       XX       /        S-`      XX       \        n        XX       XX       XX
+  XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
 )
 
 (deflayer nav
-  XX           XX       XX       XX       XX       XX        XX       XX       XX       XX       XX       XX       XX
-  XX       XX       XX       XX       XX       XX       XX        XX       XX       XX       XX       XX       XX       XX
-  XX           XX       @tmux-r  @tmux-x  @tmux-c  XX        XX       XX       XX       up       XX       XX       XX   XX
-  a            XX       @tmux-p  @tmux-f  @tmux-n  XX        XX       pgup     left     down     right    pgdn     @layers
-  XX       XX       XX       XX       XX       XX       XX        lrld     XX       XX       XX       XX       XX       XX
-  XX       XX       XX       XX                         XX                          XX       XX       XX       XX       XX
+  XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX       XX       @tmux-r  @tmux-x  @tmux-c  XX       XX       XX       XX       up       XX       XX       XX       XX
+  a            XX       @tmux-p  @tmux-f  @tmux-n  XX       XX       pgup     left     down     right    pgdn     @layers  XX
+  XX           XX       XX       XX       XX       XX       XX       lrld     XX       XX       XX       XX       XX
+  XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
 )
 
 (deflayer layers
   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-  XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-  XX           @qwerty  XX       XX       XX       @base    XX       XX       XX       XX       XX       XX       XX   XX
+  XX       @qwerty      XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX   XX
   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
   XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
   XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
@@ -103,7 +103,7 @@
 
 (deflayer qwerty
   esc          f1       f2       f3       f4       f5       f6       f7       f8       f9       f10      f11      f12
-  §         1        2        3        4        5        6        7        8        9        0        -        =        bspc
+  §        1        2        3        4        5        6        7        8        9        0        -        =        bspc
   tab          q        w        e        r        t        y        u        i        o        p        [        ]    ret
   @caps-base   a        s        d        f        g        h        j        k        l        ;        '        \
   lsft     `        z        x        c        v        b        n        m        ,        .        /        up       rsft
