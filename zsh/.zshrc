@@ -123,8 +123,21 @@ bindkey '^r' fzf_history
 bindkey '^f' fzf_tmux_session
 bindkey '^w' fzf_tmux_window
 
-alias lcc="$HOMEBREW_PREFIX/opt/llvm/bin/clang"
-alias lcxx="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
+cc() {
+	for arg in "$@"; do
+		if [ "$arg" = "-c" ]; then
+			local LDFLAGS=
+		elif [ "$arg" = "--" ]; then
+			break
+		fi
+	done
+	"$CC" $CFLAGS $LDFLAGS "$@"
+}
+_cc() { _dispatch "$CC" "${CC##*/}" "$@"; }
+compdef '_dispatch "$CC" "${CC##*/}"' cc
+cxx() { CC="$CXX" CFLAGS="$CXXFLAGS" cc "$@"; }
+compdef '_dispatch "$CXX" "${CXX##*/}"' cxx
+
 alias llfmt="$HOMEBREW_PREFIX/opt/llvm/bin/clang-format"
 alias lltidy="$HOMEBREW_PREFIX/opt/llvm/bin/clang-tidy"
 alias llrtidy='$HOMEBREW_PREFIX/opt/llvm/bin/run-clang-tidy -clang-tidy-binary="$HOMEBREW_PREFIX/opt/llvm/bin/clang-tidy" -quiet'
