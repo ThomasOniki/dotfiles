@@ -13,6 +13,7 @@ use_brew_llvm_toolchain() {
 	export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
 	export CLANG_TIDY="$HOMEBREW_PREFIX/opt/llvm/bin/clang-tidy"
 	export RUN_CLANG_TIDY="$HOMEBREW_PREFIX/opt/llvm/bin/run-clang-tidy"
+	export CLANG_FORMAT="$HOMEBREW_PREFIX/opt/llvm/bin/clang-format"
 }
 
 use_brew_gcc_toolchain() {
@@ -36,6 +37,7 @@ use_brew_gcc_toolchain() {
 	export CLANGD="clangd"
 	export CLANG_TIDY="clang-tidy"
 	export RUN_CLANG_TIDY="run-clang-tidy"
+	export CLANG_FORMAT="clang-format"
 }
 
 use_system_toolchain() {
@@ -52,4 +54,5 @@ use_system_toolchain() {
 	export CLANGD="/usr/bin/clangd"
 	export CLANG_TIDY="clang-tidy"
 	export RUN_CLANG_TIDY="run-clang-tidy"
+	export CLANG_FORMAT="clang-format"
 }
