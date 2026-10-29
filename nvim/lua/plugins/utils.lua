@@ -25,12 +25,6 @@ table.insert(spec, {
 })
 
 table.insert(spec, {
-  "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-mini/mini.icons" },
-  opts = { icons_enabled = true },
-})
-
-table.insert(spec, {
   "numToStr/Comment.nvim",
   opts = {
     toggler = { line = "<leader>c", block = "gcb" },
