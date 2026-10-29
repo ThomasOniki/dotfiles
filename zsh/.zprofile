@@ -26,6 +26,9 @@ export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
+PATH="$PYTHONUSERBASE/bin:$PATH"
+PATH="$CARGO_HOME/bin:$PATH"
+PATH="$GOBIN:$PATH"
 export PATH
 
 export MANPATH="$XDG_CACHE_HOME/cppman:$MANPATH"
