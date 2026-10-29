@@ -1,4 +1,7 @@
-source scripts/helpers.bash
+#!/bin/sh
+
+root="$(dirname "$(readlink -f -- "$0")")/../.."
+. "$root/scripts/helpers.sh"
 
 echo "Uninstalling the tailscaled LaunchDaemon, this may request your password..."
 

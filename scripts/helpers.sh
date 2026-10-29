@@ -1,12 +1,12 @@
 backup() {
-	[[ -e "$1" ]] || return
+	[ -e "$1" ] || return
 	echo "$1 already exists, moving up to $1.bak..."
 	backup "$1.bak"
 	mv "$1" "$1.bak"
 }
 
 restore_backup() {
-	[[ -e "$1.bak" ]] || return
+	[ -e "$1.bak" ] || return
 	echo "Restoring backup $1.bak to $1"
 	mv "$1.bak" "$1"
 	restore_backup "$1.bak"
@@ -20,12 +20,12 @@ try_ln() {
 }
 
 try_revert_ln() {
-	if ! [[ -e "$2" ]]; then
+	if ! [ -e "$2" ]; then
 		echo "$2 not found"
 		exit 1
 	fi
 
-	if [[ "$(realpath "$2")" != "$(realpath "$1")" ]]; then
+	if [ "$(realpath "$2")" != "$(realpath "$1")" ]; then
 		echo "$2 was not a symlink for $1, not deleting it."
 		exit 1
 	fi

@@ -8,7 +8,7 @@
   <string>sh.dotfiles.tailscaled</string>
   <key>ProgramArguments</key>
   <array>
-		<string>/opt/homebrew/opt/tailscale/bin/tailscaled</string> 
+		<string>BINARY_PATH</string> 
   </array>
   <key>RunAtLoad</key>
   <true/>

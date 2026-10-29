@@ -1,45 +1,38 @@
-#!/usr/bin/env bash
-
-if [[ "$BASH_SOURCE" != "$0" ]]; then
-	echo "run this file, don't source it."
-	return
-fi
-
-cd "$(dirname "$BASH_SOURCE")"
-cd ..
+#!/bin/sh
 
 kernel="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
 if [ "$kernel" = "darwin" ] && [ -z "$(command -v brew)" ]; then
 	echo 'Detected darwin but homebrew not found, do you want to install it? (y/N)'
 
-	read install_brew
+	read -r install_brew
 	if [ "$install_brew" = "y" ]; then
 		echo "Installing homebrew..."
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
 fi
 
-source scripts/helpers.bash
+root="$(dirname "$(readlink -f -- "$0")")/.."
+. "$root/scripts/helpers.sh"
 
 for module in "$@"; do
-	if ! [[ -d "$module" ]]; then
+	if ! [ -d "$root/$module" ]; then
 		echo "Module '$module' not found."
 		continue
 	fi
 
-	if [[ -f "scripts/symlink-paths/$module.txt" ]]; then
-		while read src dst; do
-			eval "try_ln $src $dst"
-		done <"scripts/symlink-paths/$module.txt"
+	if [ -f "$root/scripts/symlink-paths/$module.txt" ]; then
+		while read -r src dst; do
+			eval "try_ln '$root/$module/$src' $dst"
+		done <"$root/scripts/symlink-paths/$module.txt"
 	else
-		try_ln "$module" "$XDG_CONFIG_HOME/$module"
+		try_ln "$root/$module" "${XDG_CONFIG_HOME:-$HOME/.config}/$module"
 	fi
 
-	if [[ -f "scripts/install-scripts/$module.bash" ]]; then
-		bash "scripts/install-scripts/$module.bash"
+	if [ -x "$root/scripts/install-scripts/$module.sh" ]; then
+		"$root/scripts/install-scripts/$module.sh"
 	fi
-	if [[ -f "scripts/install-scripts/$module-$kernel.bash" ]]; then
-		bash "scripts/install-scripts/$module-$kernel.bash"
+	if [ -x "$root/scripts/install-scripts/$module-$kernel.sh" ]; then
+		"$root/scripts/install-scripts/$module-$kernel.sh"
 	fi
 done
