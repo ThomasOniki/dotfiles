@@ -1,9 +1,21 @@
-source <(/opt/homebrew/bin/brew shellenv zsh)
-
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
+
+source "$XDG_CONFIG_HOME/zsh/toolchains.zsh"
+
+[ -x /opt/homebrew/bin/brew ] && source <(/opt/homebrew/bin/brew shellenv zsh)
+if [ -n "$HOMEBREW_PREFIX" ]; then
+	export WINEPATH="$HOMEBREW_PREFIX/opt/mingw-w64/toolchain-x86_64/x86_64-w64-mingw32/bin;$HOMEBREW_PREFIX/opt/mingw-w64/toolchain-x86_64/x86_64-w64-mingw32/lib"
+	export WINEDEBUG="-all"
+
+	PATH="$HOMEBREW_PREFIX/bin:$PATH"
+	PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
+	export PATH
+
+	[ -d "$HOMEBREW_PREFIX/opt/llvm" ] && use_brew_llvm_toolchain
+fi
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export SHELL_SESSIONS_DISABLE=1
@@ -24,8 +36,6 @@ export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
 PATH="$HOME/.local/bin:$PATH"
-PATH="$HOMEBREW_PREFIX/bin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
 PATH="$PYTHONUSERBASE/bin:$PATH"
 PATH="$CARGO_HOME/bin:$PATH"
 PATH="$GOBIN:$PATH"
@@ -38,14 +48,3 @@ export LESSUTFCHARDEF='E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p'
 export PAGER="bat"
 export MANPAGER="nvim -c Man!"
 export BAT_STYLE="plain"
-
-export AS="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-as" CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang" CXX="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
-export AR="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ar" RANLIB="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ranlib"
-export LD="lld" CC_LD="lld" CXX_LD="lld"
-export STRIP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-strip"
-export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-nm"
-export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/
-export CLANGD="$HOMEBREW_PREFIX/opt/llvm/bin/clangd"
-export CFLAGS="-pipe" CXXFLAGS="-pipe" OBJCFLAGS="-pipe" OBJCXXFLAGS="-pipe"
-export WINEPATH="$HOMEBREW_PREFIX/opt/mingw-w64/toolchain-x86_64/x86_64-w64-mingw32/bin;$HOMEBREW_PREFIX/opt/mingw-w64/toolchain-x86_64/x86_64-w64-mingw32/lib"
-export WINEDEBUG="-all"
