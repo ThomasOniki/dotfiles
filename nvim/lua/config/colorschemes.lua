@@ -8,6 +8,7 @@ local schemes = {
   nightfox = "EdenEast/nightfox.nvim",
   vscode = "Mofiqul/vscode.nvim",
   ["rose-pine"] = "rose-pine/neovim",
+  ["gruvbox-material"] = "sainnhe/gruvbox-material",
 }
 
 local specs = {}
