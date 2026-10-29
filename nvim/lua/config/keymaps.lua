@@ -22,6 +22,12 @@ mappings.default = {
     end,
     mode = "i",
   },
+  {
+    "<leader>h",
+    function()
+      vim.diagnostic.open_float()
+    end,
+  },
 }
 
 mappings.colemak = {
