@@ -25,23 +25,6 @@
   sym1 (layer-while-held sym1)
   sym2 (layer-while-held sym2)
 
-  hyper (multi lshift lctl lalt lmet)
-
-  t-cmd (tap-hold $tap-time $hold-time t lmet)
-  s-sft (tap-hold $tap-time $hold-time s lshift)
-  r-ctl (tap-hold $tap-time $hold-time r lctl)
-  f-hyp (tap-hold $tap-time $hold-time f @hyper)
-  w-opt (tap-hold $tap-time $hold-time w lalt)
-
-  n-cmd (tap-hold $tap-time $hold-time n rmet)
-  e-sft (tap-hold $tap-time $hold-time e rshift)
-  i-ctl (tap-hold $tap-time $hold-time i rctl)
-  u-hyp (tap-hold $tap-time $hold-time u @hyper)
-  y-opt (tap-hold $tap-time $hold-time y ralt)
-
-  ret-esc (tap-hold $tap-time $hold-time ret esc)
-  spc-nav (tap-hold $tap-time $hold-time spc @nav)
-
   layers  (layer-switch layers)
   qwerty  (layer-switch qwerty)
   base    (layer-switch base)
@@ -58,11 +41,11 @@
 
 (deflayer base
   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-  tab      q        @w-opt   @f-hyp   p        b        XX       j        l        @u-hyp   @y-opt   ;        tab      XX
-  bspc         a        @r-ctl   @s-sft   @t-cmd   g        XX       m        @n-cmd   @e-sft   @i-ctl   o        @ret-esc XX
+  tab      q        w        f        p        b        XX       j        l        u        y        ;        esc      XX
+  bspc         a        r        s        t        g        XX       m        n        e        i        o        ret      XX
   `            x        c        d        v        z        caps     k        h        ,        .        /        XX
-  XX       XX       XX       @sym2    lsft     XX       XX       XX       spc      @sym1    XX       XX       XX       XX
-  XX       XX       XX       XX                         @nav                       XX       XX       XX       XX       XX
+  XX       XX       XX       @sym2    lsft     lmet     XX       XX       spc      @sym1    XX       XX       XX       XX
+  XX       XX       XX       ralt                       @nav                       rctl     XX       XX       XX       XX
 )
 
 (deflayer sym1
@@ -78,7 +61,7 @@
   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
   XX       XX       S-5      S-3      S-6      XX       XX       XX       5        3        2        9        ;        XX
   XX           S-,      S-.      [        ]        f        XX       6        1        0        4        8        7        XX
-  XX           XX       XX       XX       XX       /        S-`      XX       \        n        XX       XX       XX
+  XX           XX       XX       XX       S-\      S-`      XX       \        n        XX       XX       XX       XX
   XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
   XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
 )
@@ -94,8 +77,8 @@
 
 (deflayer layers
   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-  XX       @qwerty      XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
-  XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX   XX
+  XX       @qwerty  XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
+  XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
   XX           XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
   XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX       XX
   XX       XX       XX       XX                         XX                         XX       XX       XX       XX       XX
@@ -104,7 +87,7 @@
 (deflayer qwerty
   esc          f1       f2       f3       f4       f5       f6       f7       f8       f9       f10      f11      f12
   §        1        2        3        4        5        6        7        8        9        0        -        =        bspc
-  tab          q        w        e        r        t        y        u        i        o        p        [        ]    ret
+  tab          q        w        e        r        t        y        u        i        o        p        [        ]        ret
   @caps-base   a        s        d        f        g        h        j        k        l        ;        '        \
   lsft     `        z        x        c        v        b        n        m        ,        .        /        up       rsft
   fn       lctl     lalt     lmet                       spc                        rmet     ralt     left     down     right
