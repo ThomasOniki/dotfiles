@@ -7,7 +7,7 @@
     <string>sh.dotfiles.kanata</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/opt/homebrew/bin/kanata</string>
+      <string>BINARY_PATH</string>
       <string>--cfg</string>
       <string>/etc/kanata.kbd</string>
       <string>--quiet</string>

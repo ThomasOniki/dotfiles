@@ -1,2 +1,2 @@
-zsh/.zprofile ~/.zprofile
-zsh/.zshrc    $XDG_CONFIG_HOME/zsh/.zshrc
+.zprofile ~/.zprofile
+.zshrc    $XDG_CONFIG_HOME/zsh/.zshrc

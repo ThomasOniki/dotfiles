@@ -1,4 +1,7 @@
-source scripts/helpers.bash
+#!/bin/sh
+
+root="$(dirname "$(readlink -f -- "$0")")/../.."
+. "$root/scripts/helpers.sh"
 
 echo '
 Running kanata install script.
@@ -9,27 +12,26 @@ You may press C-c at any point to exit.
 '
 
 echo 'Copying daemons to /Library/LaunchDaemons and the config file to /etc, this may request your password...'
-sudo bash -c "source scripts/helpers.bash
-try_ln kanata/kanata.kbd /etc/kanata.kbd
-cp kanata/sh.dotfiles.kanata.plist /Library/LaunchDaemons/sh.dotfiles.kanata.plist
-cp kanata/sh.dotfiles.karabiner-vhid.plist /Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist
+sudo sh -c ". '$root/scripts/helpers.sh'
+try_ln '$root/kanata/kanata.kbd' /etc/kanata.kbd
+cp '$root/kanata/sh.dotfiles.karabiner-vhid.plist' /Library/LaunchDaemons/sh.dotfiles.karabiner-vhid.plist
 "
 
-if [[ -n "$KANATA_BINARY" ]] || KANATA_BINARY=$(command -v kanata); then
-	sudo sed -i -e "s#/.*/kanata<#$KANATA_BINARY<#g" kanata/sh.dotfiles.kanata.plist
-	sudo sed -i -e "s#/.*/kanata<#$KANATA_BINARY<#g" /Library/LaunchDaemons/sh.dotfiles.kanata.plist
+if [ -n "$KANATA_BINARY" ] || KANATA_BINARY=$(command -v kanata); then
+	sed "s#BINARY_PATH#$KANATA_BINARY#g" <"$root/kanata/sh.dotfiles.kanata.plist" |
+		sudo tee /Library/LaunchDaemons/sh.dotfiles.kanata.plist >/dev/null
 else
 	echo "Kanata binary not found. Make sure you have it installed and put it in \$PATH or set \$KANATA_BINARY."
 	exit 1
 fi
 
-if ! [[ -f /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager ]]; then
+if ! [ -f /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager ]; then
 	echo "Karabiner vhid not found, cloning the repo temporarily..."
 	git clone https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice/ vhid-repo --depth 1 --filter=blob:none
 	echo "Launching the karabiner virtual HID device installer..."
 	open -W vhid-repo/dist/Karabiner-DriverKit-VirtualHIDDevice-6.9.0.pkg
 	echo "Deleting the vhid repo..."
-	command rm -rf vhid-repo
+	rm -rf vhid-repo
 	echo "When prompted (if prompted at all), please select the 'open settings' option and check 'Driver Extension'."
 	/Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
 fi

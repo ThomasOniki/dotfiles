@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-osascript -e "display notification \"$(ps $PPID | tail -1 | cut -wf '5-')\" with title \"SSH\""
+osascript -e "display notification \"$(ps -p 1337 -o comm=)\" with title \"SSH\""
 
 if ssh-add -l >/dev/null 2>&1; then
 	nc "$1" "$2"

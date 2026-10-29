@@ -1,9 +1,12 @@
-source scripts/helpers.bash
+#!/bin/sh
+
+root="$(dirname "$(readlink -f -- "$0")")/../.."
+. "$root/scripts/helpers.sh"
 
 echo Removing kanata launch daemons, this may request your password...
 
-sudo bash -c "source scripts/helpers.bash;
-try_revert_ln kanata/kanata.kbd /etc/kanata.kbd;
+sudo sh -c ". '$root/scripts/helpers.sh';
+try_revert_ln '$root/kanata/kanata.kbd' /etc/kanata.kbd;
 "
 
 sudo launchctl bootout system/sh.dotfiles.kanata
