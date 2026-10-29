@@ -37,4 +37,12 @@ return {
     prev(1),
     t(" &&) = delete"),
   }),
+
+  s("sc", {
+    t("static_cast<"),
+    i(1, "type"),
+    t(">("),
+    i(2, "expr"),
+    t(")"),
+  }),
 }
