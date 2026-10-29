@@ -19,6 +19,7 @@ table.insert(spec, {
         require("luasnip").jump(1)
       end,
       mode = { "i", "x" },
+      desc = "Jump snippet",
     },
   },
 })
