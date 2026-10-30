@@ -29,6 +29,8 @@ h() {
 
 alias nts='tmux new -s "${PWD##*/}"'
 
+alias a='./a.out'
+
 cc() {
 	for arg in "$@"; do
 		if [ "$arg" = "-c" ]; then
