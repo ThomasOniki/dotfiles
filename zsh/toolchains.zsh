@@ -1,6 +1,8 @@
+[ -x /usr/bin/xcrun ] && export SDKROOT="$(xcrun --show-sdk-path)"
+
 use_brew_llvm_toolchain() {
 	export CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang" CXX="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
-	export CPPFLAGS="-pipe -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+	export CPPFLAGS="-pipe -isysroot '$SDKROOT'"
 	export CXXFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
 	export CFLAGS="" OBJCFLAGS="" OBJCXXFLAGS="$CXXFLAGS"
 	export LD="lld" LDFLAGS="-fuse-ld=lld"
