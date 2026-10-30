@@ -39,7 +39,6 @@ cc() {
 	done
 	sh -c "$CC $CPPFLAGS $CFLAGS $LDFLAGS \"\$@\"" arg0 "$@"
 }
-_cc() { _dispatch "$CC" "${CC##*/}" "$@"; }
 compdef '_dispatch "$CC" "${CC##*/}"' cc
 cxx() { CC="$CXX" CFLAGS="$CXXFLAGS" cc "$@"; }
 compdef '_dispatch "$CXX" "${CXX##*/}"' cxx
