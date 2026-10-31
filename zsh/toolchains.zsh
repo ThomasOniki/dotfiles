@@ -3,8 +3,9 @@
 use_brew_llvm_toolchain() {
 	export CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang" CXX="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
 	export CPPFLAGS="-pipe -isysroot '$SDKROOT'"
-	export CXXFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
-	export CFLAGS="" OBJCFLAGS="" OBJCXXFLAGS="$CXXFLAGS"
+	export CFLAGS="-std=c99"
+	export CXXFLAGS="-std=c++23 -L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
+	export OBJCFLAGS="$CFLAGS" OBJCXXFLAGS="$CXXFLAGS"
 	export LD="lld" LDFLAGS="-fuse-ld=lld"
 
 	export AS="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-as"
@@ -28,7 +29,8 @@ use_brew_gcc_toolchain() {
 
 	export CC="$bin/gcc-$ver" CXX="$bin/g++-$ver"
 	export CPPFLAGS="-pipe"
-	export CFLAGS="" CXXFLAGS="" OBJCFLAGS="" OBJCXXFLAGS=""
+	export CFLAGS="-std=c99" CXXFLAGS="-std=c++23"
+	export OBJCFLAGS="$CFLAGS" OBJCXXFLAGS="$CXXFLAGS"
 	export LD="gold" LDFLAGS="-fuse-ld=gold"
 
 	export AS="/usr/bin/as"
@@ -45,7 +47,8 @@ use_brew_gcc_toolchain() {
 use_system_toolchain() {
 	export CC="/usr/bin/clang" CXX="/usr/bin/clang++"
 	export CPPFLAGS="-pipe"
-	export CFLAGS="" CXXFLAGS="" OBJCFLAGS="" OBJCXXFLAGS=""
+	export CFLAGS="-std=c99" CXXFLAGS="-std=c++23"
+	export OBJCFLAGS="$CFLAGS" OBJCXXFLAGS="$CXXFLAGS"
 	export LD="" LDFLAGS=""
 
 	export AS="/usr/bin/as"
