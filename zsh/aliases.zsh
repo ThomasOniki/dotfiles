@@ -57,7 +57,7 @@ cmk() {
 	local subdir="$1"
 	local build_type="$2"
 	local flags="$3"
-	local link_flags="$4"
+	local link_flags="$LDFLAGS $4"
 
 	if [[ $# -gt 4 ]]; then
 		shift 4
@@ -70,10 +70,10 @@ cmk() {
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE="$build_type" \
 		-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-		-DCMAKE_C_FLAGS="$flags" \
-		-DCMAKE_CXX_FLAGS="$flags" \
-		-DCMAKE_OBJC_FLAGS="$flags" \
-		-DCMAKE_OBJCXX_FLAGS="$flags" \
+		-DCMAKE_C_FLAGS="$CPPFLAGS $CFLAGS $flags" \
+		-DCMAKE_CXX_FLAGS="$CPPFLAGS $CXXFLAGS $flags" \
+		-DCMAKE_OBJC_FLAGS="$CPPFLAGS $OBJCFLAGS $flags" \
+		-DCMAKE_OBJCXX_FLAGS="$CPPFLAGS $OBJCXXFLAGS $flags" \
 		-DCMAKE_C_LINK_FLAGS="$link_flags" \
 		-DCMAKE_CXX_LINK_FLAGS="$link_flags" \
 		-DCMAKE_OBJC_LINK_FLAGS="$link_flags" \
