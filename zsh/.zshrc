@@ -7,6 +7,10 @@ if [ -n "$HOMEBREW_PREFIX" ]; then
 	source $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 	source $HOMEBREW_PREFIX/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 	source $HOMEBREW_PREFIX/opt/zsh-autocomplete/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+else
+	source /usr/local/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+	source /usr/local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+	source /usr/local/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 fi
 
 source <(zoxide init zsh)
