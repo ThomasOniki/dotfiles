@@ -15,6 +15,8 @@ if [ -n "$HOMEBREW_PREFIX" ]; then
 	export PATH
 
 	[ -d "$HOMEBREW_PREFIX/opt/llvm" ] && use_brew_llvm_toolchain
+else
+	[ -x /usr/bin/clang ] && use_system_toolchain
 fi
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
