@@ -1,12 +1,6 @@
 #TabsToolbar { display: none !important; }
-#sidebar-box #sidebar-header { display: none !important; }
-
-:root {
-  --arrowpanel-border-radius: 0 !important;
-  --tab-border-radius: 0 !important;
-  --toolbarbutton-border-radius: 0 !important;
-  --arrowpanel-menuitem-border-radius: 0 !important;
-}
+#sidebar-panel-header { display: none !important; }
+#sidebar-box { padding-inline-start: 0px !important; }
 
 * { 
   border-radius: 0px !important;
