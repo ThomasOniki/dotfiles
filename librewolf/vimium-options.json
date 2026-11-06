@@ -1,0 +1,7 @@
+{
+  "exclusionRules": [],
+  "keyMappings": "map e scrollDown\nmap u scrollUp\nmap i nextTab\nmap n previousTab\nmap a enterInsertMode",
+  "newTabCustomUrl": "https://www.startpage.com/",
+  "newTabDestination": "customUrl",
+  "settingsVersion": "2.4.2"
+}
