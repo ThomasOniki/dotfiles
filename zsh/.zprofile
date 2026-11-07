@@ -19,6 +19,13 @@ else
 	[ -x /usr/bin/clang ] && use_system_toolchain
 fi
 
+if command -v ccache >/dev/null; then
+	export CMAKE_C_COMPILER_LAUNCHER=ccache
+	export CMAKE_CXX_COMPILER_LAUNCHER=ccache
+	export CMAKE_OBJC_COMPILER_LAUNCHER=ccache
+	export CMAKE_OBJCXX_COMPILER_LAUNCHER=ccache
+fi
+
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export SHELL_SESSIONS_DISABLE=1
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
