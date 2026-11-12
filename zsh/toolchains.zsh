@@ -7,7 +7,7 @@ use_brew_llvm_toolchain() {
 	export OBJCFLAGS="$CFLAGS" OBJCXXFLAGS="$CXXFLAGS"
 	export LD="lld" LDFLAGS="-fuse-ld=lld -L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind"
 
-	export AS="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-as"
+	export AS="/usr/bin/as"
 	export AR="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ar" RANLIB="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-ranlib"
 	export STRIP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-strip"
 	export OBJDUMP="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-objdump" NM="$HOMEBREW_PREFIX/opt/llvm/bin/llvm-nm"
