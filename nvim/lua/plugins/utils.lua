@@ -69,13 +69,6 @@ table.insert(spec, {
 })
 
 table.insert(spec, {
-  "3rd/image.nvim",
-  opts = {},
-  enabled = not vim.g.neovide,
-  event = "VeryLazy",
-})
-
-table.insert(spec, {
   "jghauser/follow-md-links.nvim",
 })
 table.insert(spec, {
