@@ -14,9 +14,4 @@ else
 fi
 
 source <(zoxide init zsh)
-
-source "$XDG_CONFIG_HOME/zsh/options.zsh"
-source "$XDG_CONFIG_HOME/zsh/keybinds.zsh"
-source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
-source "$XDG_CONFIG_HOME/zsh/toolchains.zsh"
-source "$XDG_CONFIG_HOME/zsh/fzf.zsh"
+source "$XDG_CONFIG_HOME"/zsh/config/*.zsh
