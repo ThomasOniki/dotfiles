@@ -1,7 +1,7 @@
-alias use_system_gcc_toolchain='source "$XDG_CONFIG_HOME/zsh/profile/00-system-gcc.zsh"'
+source "$XDG_CONFIG_HOME/zsh/profile/system-toolchain.zsh"
 
 use_brew_llvm_toolchain() {
-	use_system_gcc_toolchain
+	use_default_toolchain
 	export CC="$HOMEBREW_PREFIX/opt/llvm/bin/clang" CXX="$HOMEBREW_PREFIX/opt/llvm/bin/clang++"
 	export CPPFLAGS="$CPPFLAGS -isysroot '$SDKROOT'"
 	export LD="lld" LDFLAGS="-fuse-ld=lld -L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind"
@@ -20,7 +20,7 @@ use_brew_llvm_toolchain() {
 use_brew_llvm_toolchain
 
 use_brew_gnu_toolchain() {
-	use_system_gcc_toolchain
+	use_default_toolchain
 
 	local root="$(fd --type=directory --exact-depth=1 . "$HOMEBREW_PREFIX/Cellar/gcc" |
 		sort --version-sort | tail -1)"

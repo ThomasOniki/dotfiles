@@ -10,4 +10,9 @@ export PAGER="bat"
 export MANPAGER="nvim -c Man!"
 export BAT_STYLE="plain"
 
-source "$XDG_CONFIG_HOME"/zsh/profile/*.zsh
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+source <(cat "$XDG_CONFIG_HOME"/zsh/profile/*.zsh)

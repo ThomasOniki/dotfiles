@@ -14,4 +14,4 @@ else
 fi
 
 source <(zoxide init zsh)
-source "$XDG_CONFIG_HOME"/zsh/config/*.zsh
+source <(cat "$XDG_CONFIG_HOME"/zsh/config/*.zsh)

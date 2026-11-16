@@ -1,6 +1,7 @@
 [ -x /opt/homebrew/bin/brew ] || exit
 
-export SDKROOT="$(xcrun --show-sdk-path)"
+export CPPFLAGS="-isysroot $(xcrun --show-sdk-path)"
+export CFLAGS="$CFLAGS -isysroot "
 
 source <(/opt/homebrew/bin/brew shellenv zsh)
 
