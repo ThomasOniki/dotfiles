@@ -1,4 +1,4 @@
-[ -x /opt/homebrew/bin/brew ] || exit
+[ -x /opt/homebrew/bin/brew ] || return
 
 export CPPFLAGS="-isysroot $(xcrun --show-sdk-path)"
 export CFLAGS="$CFLAGS -isysroot "
