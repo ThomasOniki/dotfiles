@@ -13,6 +13,8 @@ set $right i
 #          before-sleep 'swaylock -f -c 000000'
 #
 
+exec dunst &
+
 bindsym $mod+return exec ghostty || foot
 bindsym $mod+space exec wmenu-run
 bindsym $mod+l exec librewolf
