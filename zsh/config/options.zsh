@@ -1,5 +1,7 @@
 setopt autocd
 setopt correct
-setopt interactivecomments
-setopt sharehistory
-setopt promptsubst
+setopt interactive_comments
+setopt inc_append_history
+setopt prompt_subst
+setopt hist_ignore_space
+setopt hist_ignore_dups

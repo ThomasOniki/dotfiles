@@ -22,7 +22,7 @@ fzf_zoxide_z() {
 }
 fzf_history() {
 	local output
-	output=$(history | fzf --scheme=history "$@") || return
+	output=$(fzf --scheme=history --query="$BUFFER" <"$HISTFILE") || return
 	BUFFER=$(sed 's/[ ]*[0-9]*[ ]*//' <<<"$output")
 	CURSOR=${#BUFFER}
 	zle reset-prompt
