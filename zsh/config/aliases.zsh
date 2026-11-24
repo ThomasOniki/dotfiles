@@ -1,4 +1,4 @@
-alias c="clear"
+alias c="clear; tmux clear-history"
 alias d="trash"
 
 po() {
