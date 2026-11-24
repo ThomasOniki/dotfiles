@@ -10,7 +10,7 @@ o.timeoutlen = 500
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_lines = { source = true },
   underline = true,
   signs = true,
   severity_sort = true,
