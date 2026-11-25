@@ -1,6 +1,24 @@
 alias c="clear; tmux clear-history"
 alias d="trash"
 
+gc() {
+	local url="$1"
+	shift
+	rg "^[A-Za-z0-9-]+/[A-Za-z0-9-]+(.git)?$" >/dev/null <<<"$url" && url="https://github.com/$url"
+	rg "^cb:[A-Za-z0-9-]+/[A-Za-z0-9-]+(.git)?$" >/dev/null <<<"$url" && url="https://codeberg.org/${url#cb:}"
+	if [[ "$url" != https://* ]] && [[ "$url" != ssh://* ]] && [[ "$url" != file://* ]] && [[ "$url" != /* ]] && [[ "$url" != *:* ]]; then
+		url="https://$url"
+	fi
+	[[ "$url" != *.git ]] && url="$url.git"
+	git clone "$url" "$@"
+}
+gcs() {
+	gc "$@" --depth=1
+}
+gcsr() {
+	gc "$@" --depth=1 --recursive --shallow-submodules
+}
+
 po() {
 	local output
 	output="$("$@")" && bat <<<"$output"
