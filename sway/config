@@ -7,6 +7,8 @@ set $right i
 # output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # output HDMI-A-1 resolution 1920x1080 position 1920,0
 
+exec swaymsg 'input * xkb_options compose:ralt'
+
 # exec swayidle -w \
 #          timeout 300 'swaylock -f -c 000000' \
 #          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -87,6 +89,6 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
 bindsym Print exec grim
 
-default_border none
+default_border pixel
 
 include @sysconfdir@/sway/config.d/*
