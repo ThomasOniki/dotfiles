@@ -5,8 +5,8 @@ use_default_toolchain() {
 	export OBJCFLAGS="$CFLAGS"
 	export OBJCXXFLAGS="$CXXFLAGS"
 	export LDFLAGS=
-	export CC= CXX= LD= AS= AR= RANLIB= STRIP= OBJDUMP= NM=
-	export CXXFILT= CLANGD= CLANG_TIDY= RUN_CLANG_TIDY= CLANG_FORMAT=
+	export CC=cc CXX=c++ LD=ld AS=as AR=ar RANLIB=ranlib STRIP=strip OBJDUMP=objdump NM=nm
+	export CXXFILT=c++filt CLANGD=clangd CLANG_TIDY=clang-tidy RUN_CLANG_TIDY=run-clang-tidy CLANG_FORMAT=clang-format
 }
 
 use_gcc() {
