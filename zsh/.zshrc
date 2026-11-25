@@ -1,4 +1,5 @@
 fastfetch
+tmux attach 2>/dev/null
 
 PROMPT='%(?..%F{red}%B(%?%)%f%b )%~ ❯ '
 HISTFILE="$XDG_STATE_HOME/zsh_history"
