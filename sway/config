@@ -17,7 +17,7 @@ exec swaymsg 'input * xkb_options compose:ralt'
 
 exec dunst &
 
-bindsym $mod+return exec ghostty || foot
+bindsym $mod+return exec foot
 bindsym $mod+space exec wmenu-run
 bindsym $mod+l exec librewolf
 
