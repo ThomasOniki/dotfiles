@@ -5,7 +5,7 @@ set $up u
 set $right i
 
 # output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-# output HDMI-A-1 resolution 1920x1080 position 1920,0
+output Virtual-1 resolution 1920x1200 scale 1
 
 exec swaymsg 'input * xkb_options compose:ralt'
 
